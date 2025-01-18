@@ -1,0 +1,139 @@
+---
+title: Variables
+sidebar:
+  badge:
+    text: ES6
+    variant: caution
+---
+
+import { Badge } from "@astrojs/starlight/components";
+
+En el día a día de una aplicación de JavaScript, necesitamos trabajar con información. Aquí tienes dos ejemplos:
+
+- **Una tienda en línea** 🛒: La información puede incluir los productos a la venta y el carrito de compras.
+- **Una aplicación de chat** 💬: La información puede incluir usuarios, mensajes, y mucho más.
+
+Para manejar esta información, usamos variables. 🏷️
+
+## ¿Qué es una variable? 🤔
+
+Una variable es como un "almacén con un nombre" donde podemos guardar datos. Piensa en ellas como cajones donde podemos meter cosas como golosinas, visitas o cualquier otro tipo de información.
+
+En JavaScript, usamos la palabra clave `var` para crear una variable.
+
+Por ejemplo, para crear una variable llamada message:
+
+```js
+var message;
+```
+
+Ahora, podemos guardar algo dentro de esta variable usando el operador de asignación `=`:
+
+```js
+var message;
+
+message = "Hola";
+```
+
+La cadena `'Hola'` ahora está guardada en la memoria asociada con la variable `message`. Y podemos acceder a su contenido cuando queramos:
+
+```js
+var message;
+message = "Hola!";
+
+alert(message); // muestra el contenido de la variable
+```
+
+Si lo prefieres, puedes combinar la declaración y la asignación en una sola línea:
+
+```js
+var message = "Hola!"; // define la variable y asigna un valor
+
+alert(message); // Hola!
+```
+
+También puedes declarar varias variables en una sola línea:
+
+```js
+var user = "John",
+  age = 25,
+  message = "Hola";
+```
+
+Aunque esta opción es más compacta, **no se recomienda** por motivos de legibilidad. Es mejor escribir cada variable en su propia línea:
+
+```js
+var user = "John";
+var age = 25;
+var message = "Hola";
+```
+
+Aunque las tres formas funcionan, lo mejor es que escojas la que te resulte más fácil de leer. 🧐
+
+## Nombramiento de variables 🏷️
+
+En JavaScript, **hay algunas reglas** sobre cómo puedes nombrar las variables:
+
+1. Los nombres solo pueden incluir letras, números, o los símbolos `$` y `_`.
+2. El primer carácter no puede ser un número. 🚫
+
+Ejemplos de nombres válidos:
+
+```js
+var $ = 1; // válido
+var _ = 2; // válido
+var userName;
+var test123;
+```
+
+Cuando tienes más de una palabra, la convención más común es usar camelCase. Esto significa que las palabras se escriben juntas y la primera letra de cada palabra, excepto la primera, está en mayúsculas. Ejemplo: `miNombreMuyLargo`.
+
+Ejemplos de nombres incorrectos:
+
+```js
+var 1a; // no puede empezar con un número
+var my-name; // guiones no están permitidos
+```
+
+## `let` y `const` <Badge text="ES6" variant="caution" />
+
+Con la llegada de ECMAScript 6 (ES6), **se introdujeron** `let` y `const` como nuevas formas de declarar variables. A diferencia de `var`, tienen características que los hacen más seguros y predecibles.
+
+### `let` 🔄
+
+Antes de ES6, usábamos `var` para declarar variables, pero con `let` podemos crear variables que **tienen un alcance de bloque** (scope limitado al bloque en el que están definidas). Esto significa que una variable definida con `let` solo es accesible dentro del bloque de código donde fue declarada, como dentro de un `if` o un bucle `for`. Esto soluciona muchos problemas de "hoisting" y alcance global que ocurrían con var.
+
+Ejemplo de `let`:
+
+```js
+if (true) {
+  let message = "¡Hola desde el bloque!";
+  alert(message); // Funciona aquí
+}
+
+alert(message); // Error, `message` no está definida fuera del bloque
+```
+
+En este caso, `message` solo está disponible dentro del bloque `if`, y tratar de acceder a ella fuera de este bloque genera un error.
+
+### `const` 🔐
+
+`const` se usa para declarar constantes, es decir, valores que no se pueden modificar una vez asignados. Al igual que `let`, las **constantes tienen alcance de bloque** y no son accesibles fuera de su bloque de declaración.
+
+Ejemplo de `const`:
+
+```js
+const pi = 3.14;
+
+pi = 3.14159; // ¡Error! No se puede reasignar una constante.
+```
+
+## Diferencias entre `var`, `let` y `const` 🤔
+
+- `var`: Tiene un alcance **funcional** (se puede acceder a ella dentro de toda la función en la que fue declarada, sin importar dónde se declare). Tiene problemas de hoisting y puede ser redeclarada sin generar errores.
+- `let`: Tiene un alcance **de bloque** (solo es accesible dentro del bloque donde se declara, como dentro de un if o un bucle). No puede ser redeclarada dentro del mismo bloque.
+- `const`: También tiene un alcance **de bloque** y se usa para declarar valores **constantes**, es decir, valores que no pueden ser reasignados una vez establecidos.
+
+---
+
+¡Y eso es todo! Ahora sabes cómo usar `var`, `let` y `const` para manejar variables y constantes en JavaScript. Recuerda que, generalmente, es una buena práctica usar `let` y `const` en lugar de `var` para mejorar la seguridad y legibilidad de tu código. 😎
