@@ -19,9 +19,9 @@ export default defineConfig({
         {
           label: "Introducción",
           items: [
-            { label: "Bienvenidos", slug: "guides/introduction" },
-            { label: "¿Qué es JavaScript?", slug: "guides/javascript" },
-            { label: "Editores de Código", slug: "guides/code-editors" },
+            { label: "Bienvenidos", slug: "guides/intro/introduction" },
+            { label: "¿Qué es JavaScript?", slug: "guides/intro/javascript" },
+            { label: "Editores de Código", slug: "guides/intro/code-editors" },
           ],
         },
         // {
