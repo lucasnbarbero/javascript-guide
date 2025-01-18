@@ -28,6 +28,10 @@ export default defineConfig({
           label: "Fundamentos",
           autogenerate: { directory: "guides/basics" },
         },
+        {
+          label: "Ejercicios",
+          autogenerate: { directory: "guides/exercises" },
+        },
         // {
         //   label: "Guides",
         //   items: [
