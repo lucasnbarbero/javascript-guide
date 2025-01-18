@@ -1,0 +1,64 @@
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap");
+
+:root,
+::backdrop {
+  --sl-color-white: hsl(0, 0%, 100%);
+  --sl-color-gray-1: hsl(220, 20%, 94%);
+  --sl-color-gray-2: hsl(220, 10%, 77%);
+  --sl-color-gray-3: hsl(220, 10%, 56%);
+  --sl-color-gray-4: hsl(220, 12%, 36%);
+  --sl-color-gray-5: hsl(220, 14%, 23%);
+  --sl-color-gray-6: hsl(220, 18%, 16%);
+  --sl-color-black: hsl(220, 12%, 10%);
+
+  /* New color scheme for JavaScript */
+  --sl-hue-yellow: 50;
+  --sl-color-yellow-low: hsl(var(--sl-hue-yellow), 40%, 20%);
+  --sl-color-yellow: hsl(var(--sl-hue-yellow), 90%, 50%);
+  --sl-color-yellow-high: hsl(var(--sl-hue-yellow), 90%, 80%);
+
+  --sl-hue-orange: 33;
+  --sl-color-orange-low: hsl(var(--sl-hue-orange), 45%, 20%);
+  --sl-color-orange: hsl(var(--sl-hue-orange), 85%, 55%);
+  --sl-color-orange-high: hsl(var(--sl-hue-orange), 85%, 75%);
+
+  --sl-hue-green: 130;
+  --sl-color-green-low: hsl(var(--sl-hue-green), 40%, 25%);
+  --sl-color-green: hsl(var(--sl-hue-green), 80%, 55%);
+  --sl-color-green-high: hsl(var(--sl-hue-green), 80%, 75%);
+
+  --sl-hue-blue: 220;
+  --sl-color-blue-low: hsl(var(--sl-hue-blue), 50%, 20%);
+  --sl-color-blue: hsl(var(--sl-hue-blue), 70%, 50%);
+  --sl-color-blue-high: hsl(var(--sl-hue-blue), 70%, 75%);
+
+  --sl-color-accent-low: var(--sl-color-yellow-low);
+  --sl-color-accent: var(--sl-color-yellow);
+  --sl-color-accent-high: var(--sl-color-yellow-high);
+
+  --sl-color-text: var(--sl-color-gray-2);
+  --sl-color-text-accent: var(--sl-color-yellow);
+  --sl-color-text-invert: var(--sl-color-gray-6);
+  --sl-color-bg: var(--sl-color-black);
+  --sl-color-bg-nav: var(--sl-color-gray-6);
+  --sl-color-bg-sidebar: var(--sl-color-gray-5);
+  --sl-color-bg-inline-code: var(--sl-color-gray-4);
+  --sl-color-bg-accent: var(--sl-color-yellow-high);
+  --sl-color-hairline-light: var(--sl-color-gray-4);
+  --sl-color-hairline: var(--sl-color-gray-5);
+  --sl-color-hairline-shade: var(--sl-color-black);
+
+  /* Shadows (dark mode) */
+  --sl-shadow-sm: 0px 1px 1px hsla(0, 0%, 0%, 0.1),
+    0px 2px 1px hsla(0, 0%, 0%, 0.2);
+  --sl-shadow-md: 0px 8px 4px hsla(0, 0%, 0%, 0.08),
+    0px 5px 2px hsla(0, 0%, 0%, 0.08), 0px 3px 2px hsla(0, 0%, 0%, 0.12),
+    0px 1px 1px hsla(0, 0%, 0%, 0.15);
+  --sl-shadow-lg: 0px 25px 7px hsla(0, 0%, 0%, 0.05),
+    0px 16px 6px hsla(0, 0%, 0%, 0.15), 0px 9px 5px hsla(220, 10%, 10%, 0.33),
+    0px 4px 4px hsla(0, 0%, 0%, 0.75), 0px 4px 2px hsla(0, 0%, 0%, 0.25);
+
+  --sl-font-system: Geist, Roboto, "Helvetica Neue", Arial, "Noto Sans",
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+    "Noto Color Emoji";
+}

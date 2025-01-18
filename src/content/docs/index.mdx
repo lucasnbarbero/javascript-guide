@@ -1,36 +1,45 @@
 ---
-title: Welcome to Starlight
-description: Get started building your docs site with Starlight.
+title: Guía interactiva de JavaScript
 template: splash
 hero:
-  tagline: Congrats on setting up a new Starlight project!
+  tagline: Domina los fundamentos y crea aplicaciones web interactivas
   image:
-    file: ../../assets/houston.webp
+    file: ../../assets/logo_javascript.webp
   actions:
-    - text: Example Guide
-      link: /guides/example/
+    - text: Comencemos
+      link: /guides/introduction
       icon: right-arrow
-    - text: Read the Starlight docs
-      link: https://starlight.astro.build
+    - text: View on GitHub
+      link: https://github.com/astronaut/my-project
       icon: external
       variant: minimal
+      attrs:
+        rel: me
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+import { Card, CardGrid } from "@astrojs/starlight/components";
 
-## Next steps
+## Abordaremos los siguientes temas
 
 <CardGrid stagger>
-	<Card title="Update content" icon="pencil">
-		Edit `src/content/docs/index.mdx` to see this page change.
-	</Card>
-	<Card title="Add new content" icon="add-document">
-		Add Markdown or MDX files to `src/content/docs` to create new pages.
-	</Card>
-	<Card title="Configure your site" icon="setting">
-		Edit your `sidebar` and other config in `astro.config.mjs`.
-	</Card>
-	<Card title="Read the docs" icon="open-book">
-		Learn more in [the Starlight Docs](https://starlight.astro.build/).
-	</Card>
+  <Card title="Introducción a JavaScript" icon="seti:javascript">
+    Descubre los fundamentos de JavaScript, desde variables y tipos de datos
+    hasta funciones y objetos.
+  </Card>
+  <Card title="ES6 y más allá" icon="rocket">
+    Aprende sobre las características modernas como desestructuración, promesas
+    y clases, y cómo aplicarlas.
+  </Card>
+  <Card title="Manipulación del DOM" icon="seti:html">
+    Aprende a interactuar con elementos HTML y a crear experiencias dinámicas
+    con JavaScript.
+  </Card>
+  <Card title="Ejemplos prácticos en cada tema" icon="seti:json">
+    Explora ejemplos prácticos diseñados para cada tema, ayudándote a aplicar
+    los conceptos en escenarios reales.
+  </Card>
+  <Card title="Ejercicio final" icon="approve-check">
+    Pon a prueba tus habilidades con un proyecto integrador para consolidar todo
+    lo aprendido.
+  </Card>
 </CardGrid>
