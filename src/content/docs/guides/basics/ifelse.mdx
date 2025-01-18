@@ -1,0 +1,82 @@
+---
+title: Condicionales
+sidebar:
+  order: 6
+---
+
+Las estructuras condicionales son esenciales en programación para controlar el flujo de ejecución de nuestro código. Nos permiten tomar decisiones basadas en condiciones específicas y ejecutar diferentes bloques de código según esas condiciones. ¡Veamos cómo funcionan! 💡
+
+## 📝 `if`
+
+La sentencia `if(...)` evalúa la condición dentro de los paréntesis. Si el resultado es verdadero (`true`), se ejecuta el bloque de código.
+
+```js
+var year = prompt("¿En qué año fue creado JavaScript?");
+
+if (year == 1995) alert("¡Estás en lo cierto! 🎉");
+```
+
+Si queremos ejecutar varias sentencias, debemos colocar nuestro bloque de código entre llaves `{}`:
+
+```js
+if (year == 1995) {
+  alert("¡Es Correcto! ✅");
+  alert("¡Eres muy inteligente! 🤓");
+}
+```
+
+## 🔄 `else`
+
+El bloque `else` es opcional y se ejecuta cuando la condición es **falsa**. Es útil para manejar el "si no" de la lógica.
+
+```js
+var year = prompt("¿En qué año fue creado JavaScript?");
+
+if (year == 1995) {
+  alert("¡Lo adivinaste, correcto! 🎯");
+} else {
+  alert("¿Cómo puedes estar tan equivocado? 😅"); // cualquier valor excepto 1995
+}
+```
+
+## 🔢 `else-if`
+
+Cuando necesitamos probar más de una condición, usamos la cláusula `else if`. Así podemos verificar varias opciones.
+
+```js
+var year = prompt("¿En qué año fue creado JavaScript?");
+
+if (year < 2015) {
+  alert("¡Muy poco... 😬");
+} else if (year > 2015) {
+  alert("¡Muy tarde! 🕰️");
+} else {
+  alert("¡Exactamente! 🎉");
+}
+```
+
+## 🔄 `switch`
+
+La estructura `switch` nos permite ejecutar diferentes bloques de código según el valor de una expresión. Es ideal cuando tenemos muchas condiciones para verificar.
+
+```js
+var dia = 3;
+var nombreDia;
+
+switch (dia) {
+  case 1:
+    nombreDia = "Lunes";
+    break;
+  case 2:
+    nombreDia = "Martes";
+    break;
+  case 3:
+    nombreDia = "Miércoles";
+    break;
+  // Más casos aquí...
+  default:
+    nombreDia = "Día no válido 🚫";
+}
+
+alert("Hoy es " + nombreDia);
+```
