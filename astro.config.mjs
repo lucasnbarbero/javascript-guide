@@ -18,7 +18,11 @@ export default defineConfig({
       sidebar: [
         {
           label: "Introducción",
-          slug: "guides/introduction",
+          items: [
+            { label: "Bienvenidos", slug: "guides/introduction" },
+            { label: "¿Qué es JavaScript?", slug: "guides/javascript" },
+            { label: "Editores de Código", slug: "guides/code-editors" },
+          ],
         },
         // {
         //   label: "Guides",
