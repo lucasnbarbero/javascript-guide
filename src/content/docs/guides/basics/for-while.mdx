@@ -1,0 +1,85 @@
+---
+title: Bucles
+sidebar:
+  order: 7
+---
+
+Los **bucles** son una herramienta clave en programación, y te permiten repetir un bloque de código varias veces mientras se cumpla una condición. ¡Son súper útiles! 😎
+
+## `while` 🌀
+
+El bucle `while` (mientras) tiene la siguiente sintaxis:
+
+```js
+while (condition) {
+  // código a ejecutar
+}
+```
+
+Mientras que la condición `condition` sea **verdadera**, el código dentro del bucle seguirá ejecutándose. 🔄
+
+Por ejemplo, este bucle imprimirá i mientras i < 3:
+
+```js
+var i = 0;
+while (i < 3) {
+  // muestra 0, luego 1, luego 2
+  alert(i);
+  i++;
+}
+```
+
+Cada vez que el cuerpo del bucle se ejecute, se llama **iteración**. En este caso, el bucle tiene **3 iteraciones**.
+
+⚠️ Si olvidamos el `i++` en el ejemplo, ¡el bucle se repetiría para siempre! Afortunadamente, los navegadores pueden detener estos bucles infinitos, pero es algo a tener en cuenta.
+
+## `do...while` 🔁
+
+En el bucle `do...while`, la condición se evalúa **después** de ejecutar el cuerpo del bucle. ¡Esto asegura que el código se ejecute al menos una vez! 🤩
+
+```js
+do {
+  // código a ejecutar
+} while (condition);
+```
+
+Por ejemplo:
+
+```js
+let i = 0;
+do {
+  alert(i);
+  i++;
+} while (i < 3);
+```
+
+Usa esta versión si quieres asegurarte de que el código dentro del bucle se ejecute al **menos una vez**, incluso si la condición no es verdadera. Generalmente, preferimos el bucle `while` en otros casos. 🤔
+
+## `for` 🔢
+
+El bucle `for` es genial cuando sabes exactamente cuántas veces quieres repetir el código.
+
+```js
+for (inicio; condición; incremento) {
+  // código a ejecutar
+}
+```
+
+Las partes del bucle:
+
+- **inicio**: Se ejecuta una vez antes de que empiece el bucle, normalmente para inicializar variables.
+- **condición**: Se evalúa antes de cada repetición. Si es verdadera, el bucle sigue. Si es falsa, se detiene.
+- **incremento**: Se ejecuta al final de cada repetición, usualmente para actualizar variables.
+
+Ejemplo de un bucle for que muestra números del 1 al 3:
+
+```js
+for (let i = 1; i <= 3; i++) {
+  alert(i);
+}
+```
+
+## 🆚 Comparación
+
+- Usa el bucle `while` cuando no sepas cuántas veces necesitarás repetir el bloque de código.
+- Usa el bucle `for` cuando ya sepas de antemano cuántas veces quieres que se ejecute el código.
