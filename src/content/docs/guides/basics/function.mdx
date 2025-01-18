@@ -1,0 +1,296 @@
+---
+title: Funciones
+sidebar:
+  order: 8
+  badge:
+    text: ES6
+    variant: caution
+---
+
+import { Aside, Badge } from "@astrojs/starlight/components";
+
+En JavaScript, las funciones son bloques de código diseñados para realizar tareas específicas. Son uno de los pilares fundamentales de la programación, ya que permiten escribir código modular, reutilizable y fácil de mantener. 💡
+
+Seguramente ya has usado funciones integradas como `alert(message)`, `prompt(message, default)` o `confirm(question)`. ¡Pero también puedes crear tus propias funciones! 🚀
+
+## Declaración de funciones
+
+Para declarar una función, usa la palabra clave `function` seguida del nombre de la función, paréntesis `()` (que pueden contener parámetros) y un bloque de código `{}`:
+
+```js
+function showMessage() {
+  alert("¡Hola a todos! 👋");
+}
+```
+
+<Aside type="note" title="Nota">
+  Los paréntesis pueden estar vacíos si no necesitas parámetros. El bloque `{}`
+  define lo que la función hará cuando sea llamada.
+</Aside>
+
+### Con parámetros
+
+Las funciones pueden aceptar **parámetros**, que son valores que pasan información a la función:
+
+```js
+function showMessage(message) {
+  alert(message);
+}
+```
+
+## Ejecución de una función
+
+Una vez declarada, se llama a la función escribiendo su nombre seguido de paréntesis. Si tiene parámetros, pasa los valores dentro de ellos:
+
+```js
+showMessage("¡Hola a todos! 🎉");
+showMessage("¡Hasta la próxima! 👋");
+```
+
+✨ **Ventaja clave**: Evitas duplicar código. Si necesitas cambiar cómo funciona, ¡solo debes modificar la función! 🛠️
+
+### Parámetros por defecto <Badge text="ES6" variant="caution" />
+
+A partir de ES6, puedes asignar valores predeterminados a los parámetros. Esto asegura que la función pueda funcionar incluso si no recibe ciertos argumentos:
+
+```js
+function saludar(nombre = "usuario") {
+  alert(`¡Hola, ${nombre}! 🤗`);
+}
+
+saludar(); // ¡Hola, usuario!
+saludar("Lucas"); // ¡Hola, Lucas!
+```
+
+## Retorno de valores
+
+Una función puede **devolver un resultado** al llamarla, usando la palabra clave `return`. Esto permite que otras partes del código utilicen el valor devuelto:
+
+```js
+function sum(a, b) {
+  return a + b;
+}
+
+let result = sum(2, 3);
+alert(result); // 5
+```
+
+<Aside type="note" title="Nota">
+  Cuando `return` se ejecuta, la función se detiene inmediatamente. Si el código
+  llega a esa línea, lo demás se ignora.
+</Aside>
+
+## Expresiones de función
+
+En JavaScript, además de declarar funciones de forma clásica, puedes crear funciones usando **expresiones de función**. Estas son funciones anónimas asignadas a una variable.
+
+```js
+const sayHello = function () {
+  alert("¡Hola desde una expresión! 🌟");
+};
+
+sayHello(); // ¡Hola desde una expresión!
+```
+
+⚡ **Diferencia clave**: Las expresiones de función **no se elevan** (hoisting). Debes definirlas antes de llamarlas.
+
+## Callbacks
+
+Un callback es una función pasada como argumento a otra función y ejecutada después de completar alguna operación. Son esenciales para manejar asincronía. 💻
+
+```js
+function greet(name, callback) {
+  console.log(`Hola, ${name}!`);
+  callback();
+}
+
+greet("Lucas", () => console.log("Adiós 👋"));
+```
+
+## Funciones Flecha <Badge text="ES6" variant="caution" />
+
+Las **funciones flecha**, también conocidas como _**arrow functions**_ son una forma moderna, ✂️ más corta y 💡 más clara de escribir funciones en JavaScript. Su sintaxis es súper elegante y se reconocen fácilmente gracias a su característica flecha `=>`.
+
+```js
+let func = (arg1, arg2, ..., argN) => expresión;
+```
+
+#### 🔍 ¿Qué significa esto?
+
+Es como decir: "Crea una función llamada `func` que reciba los parámetros `arg1, arg2, ..., argN`, evalúe la `expresión` a la derecha de la flecha y devuelva el resultado automáticamente".
+
+Es básicamente una forma abreviada de escribir:
+
+```js
+let func = function(arg1, arg2, ..., argN) {
+  return expresión;
+};
+```
+
+#### Un ejemplo práctico
+
+Supongamos que queremos sumar dos números. Con una función flecha, podríamos escribir:
+
+```js
+let sum = (a, b) => a + b;
+
+// Es lo mismo que escribir:
+// let sum = function(a, b) {
+//   return a + b;
+// };
+
+alert(sum(1, 2)); // 3
+```
+
+👀 ¿Qué está pasando aquí?
+`(a, b) => a + b` define una función que recibe dos argumentos, `a y b`. Luego, evalúa la expresión `a + b` y devuelve el resultado automáticamente. ¡Así de simple y directo!
+
+### Funciones Flecha Multilínea
+
+Hasta ahora, hemos visto ejemplos simples que caben en una sola línea. Pero ¿qué pasa si nuestra función necesita varias líneas de código? En ese caso, podemos usar llaves `{}` para envolver las instrucciones y añadir un `return` explícito (como en las funciones tradicionales).
+
+```js
+let sum = (a, b) => {
+  // Aquí abrimos una función multilínea
+  let result = a + b;
+  return result; // Necesitamos usar "return" cuando hay llaves
+};
+
+alert(sum(1, 2)); // 3
+```
+
+🔑 **Recuerda**: `Si usas llaves {}`, necesitas incluir un `return` explícito para devolver el resultado.
+
+## Scope y Closures <Badge text="ES6" variant="caution" />
+
+Entender el scope y los closures es clave para escribir código eficiente y moderno en JavaScript. 🧠💻 A partir de ES6, estos conceptos se volvieron más claros gracias a la introducción de nuevas herramientas como `let` y `const`. ¡Veamos todo esto en acción! 🚀
+
+### Scope
+
+El **scope** (o ámbito) se refiere al contexto donde las variables existen y son accesibles. JavaScript organiza el scope en tres tipos principales:
+
+- **Scope Global** 🌍
+- **Scope Local** 🏠
+- **Scope de Bloque** 📦 (introducido en ES6 con `let` y `const`)
+
+#### 🌍 Scope Global
+
+Las variables declaradas fuera de cualquier función o bloque pertenecen al scope global. Esto significa que puedes acceder a ellas desde cualquier lugar del código.
+
+```js
+let globalVar = "Soy una variable global";
+
+function showGlobalVar() {
+  alert(globalVar);
+}
+
+showGlobalVar(); // Soy una variable global
+```
+
+<Aside type="tip" title="Tip">
+  Evita llenar el scope global con demasiadas variables para mantener el código
+  organizado.
+</Aside>
+
+#### 🏠 Scope Local
+
+Las variables declaradas dentro de una función tienen un alcance limitado a esa función. No puedes acceder a ellas desde fuera.
+
+```js
+function myFunction() {
+  let localVar = "Soy una variable local";
+  console.log(localVar);
+}
+
+myFunction(); // Soy una variable local
+console.log(localVar); // ❌ Error: localVar no está definida
+```
+
+#### 📦 Scope de Bloque
+
+A partir de ES6, puedes usar `let` y `const` para declarar variables con **scope de bloque**. Esto significa que solo están disponibles dentro del bloque donde se declaran.
+
+```js
+if (true) {
+  let blockVar = "Soy una variable de bloque";
+  console.log(blockVar); // Soy una variable de bloque
+}
+
+console.log(blockVar); // ❌ Error: blockVar no está definida
+```
+
+<Aside type="note" title="Nota">
+  A diferencia de `var`, que ignora el scope de bloque, `let` y `const` respetan
+  el alcance limitado. ¡Úsalos siempre que puedas! 🛠️
+</Aside>
+
+#### ⛓️ Scope Anidado
+
+Los scopes pueden estar anidados. Una función puede acceder a las variables definidas en su scope externo.
+
+```js
+let outerVar = "Estoy fuera";
+
+function outerFunction() {
+  let innerVar = "Estoy dentro";
+
+  function innerFunction() {
+    console.log(outerVar); // Estoy fuera
+    console.log(innerVar); // Estoy dentro
+  }
+
+  innerFunction();
+}
+
+outerFunction();
+```
+
+🧩 **¿Qué aprendimos?** Las funciones "heredan" variables de su scope superior, pero no al revés.
+
+### Closures
+
+Un **closure** es una función que "recuerda" el entorno donde fue creada, incluyendo las variables del scope externo. Esto sucede incluso después de que la función haya terminado de ejecutarse.
+
+```js
+function crearSaludador(nombre) {
+  return function () {
+    console.log(`¡Hola, ${nombre}!`);
+  };
+}
+
+const saludarLucas = crearSaludador("Lucas");
+saludarLucas(); // ¡Hola, Lucas!
+
+const saludarMaria = crearSaludador("Maria");
+saludarMaria(); // ¡Hola, Maria!
+```
+
+📋 ¿Qué pasó aquí?
+
+1. Función Externa: `crearSaludador` toma un parámetro `nombre` y devuelve una nueva función.
+2. Función Interna (closure): La función devuelta "recuerda" el valor de `nombre` del momento en que fue creada.
+3. Ejecutar el Closure: Cada vez que llamamos a las funciones devueltas (`saludarLucas`, `saludarMaria`), estas utilizan el valor de `nombre` que quedó guardado en su entorno.
+
+#### Ejemplo de contador
+
+```js
+function crearContador() {
+  let contador = 0;
+
+  return function () {
+    contador++;
+    console.log(contador);
+  };
+}
+
+const contador1 = crearContador();
+contador1(); // 1
+contador1(); // 2
+contador1(); // 3
+
+const contador2 = crearContador();
+contador2(); // 1
+contador2(); // 2
+```
+
+✨ **¿Por qué es útil?** Este patrón es ideal para guardar un estado privado en funciones, evitando conflictos con otras partes del código.
