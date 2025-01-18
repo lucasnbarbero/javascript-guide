@@ -4,11 +4,23 @@ sidebar:
   order: 7
 ---
 
+import { Aside } from "@astrojs/starlight/components";
+
 Los **bucles** son una herramienta clave en programación, y te permiten repetir un bloque de código varias veces mientras se cumpla una condición. ¡Son súper útiles! 😎
+
+## ¿Por qué son importantes los bucles? 🤔
+
+Los bucles son ideales para:
+
+- Procesar listas de datos (como arrays 📋).
+- Repetir tareas hasta que se cumpla una condición específica.
+- Automatizar procesos repetitivos sin escribir el mismo código varias veces.
+
+En JavaScript, los bucles más comunes son `while`, `do...while`, y `for`. ¡Vamos a explorarlos! 🚀
 
 ## `while` 🌀
 
-El bucle `while` (mientras) tiene la siguiente sintaxis:
+El bucle `while` ejecuta un bloque de código **mientras** una condición sea verdadera. Su sintaxis es:
 
 ```js
 while (condition) {
@@ -18,7 +30,7 @@ while (condition) {
 
 Mientras que la condición `condition` sea **verdadera**, el código dentro del bucle seguirá ejecutándose. 🔄
 
-Por ejemplo, este bucle imprimirá i mientras i < 3:
+Por ejemplo, este bucle imprimirá `i` mientras `i < 3`:
 
 ```js
 var i = 0;
@@ -29,13 +41,19 @@ while (i < 3) {
 }
 ```
 
-Cada vez que el cuerpo del bucle se ejecute, se llama **iteración**. En este caso, el bucle tiene **3 iteraciones**.
+#### Iteraciones
 
-⚠️ Si olvidamos el `i++` en el ejemplo, ¡el bucle se repetiría para siempre! Afortunadamente, los navegadores pueden detener estos bucles infinitos, pero es algo a tener en cuenta.
+Cada vez que el cuerpo del bucle se ejecute, se llama una **iteración**. En el ejemplo anterior, el bucle realiza **3 iteraciones**: para `i = 0`, `i = 1` y `i = 2`.
+
+<Aside type="caution" title="Precaución">
+  ⚠️ Si olvidamos el `i++` en el ejemplo, ¡el bucle se repetiría para siempre!
+  Afortunadamente, los navegadores pueden detener estos bucles infinitos, pero
+  es algo a tener en cuenta.
+</Aside>
 
 ## `do...while` 🔁
 
-En el bucle `do...while`, la condición se evalúa **después** de ejecutar el cuerpo del bucle. ¡Esto asegura que el código se ejecute al menos una vez! 🤩
+El bucle `do...while` es similar a `while`, pero tiene una diferencia importante: la **condición se evalúa después** de ejecutar el cuerpo del bucle. Esto asegura que el código dentro del bucle se ejecute al menos una vez. ✨
 
 ```js
 do {
@@ -43,21 +61,23 @@ do {
 } while (condition);
 ```
 
-Por ejemplo:
+En este caso, el código se ejecutará al menos una vez, incluso si la condición no es verdadera desde el inicio:
 
 ```js
 let i = 0;
 do {
-  alert(i);
+  alert(i); // muestra 0
   i++;
 } while (i < 3);
 ```
 
-Usa esta versión si quieres asegurarte de que el código dentro del bucle se ejecute al **menos una vez**, incluso si la condición no es verdadera. Generalmente, preferimos el bucle `while` en otros casos. 🤔
+#### ¿Cuándo usar `do...while`?
+
+Usa `do...while` cuando necesites que el bloque de código se ejecute al menos una vez, sin importar si la condición inicial es verdadera o no.
 
 ## `for` 🔢
 
-El bucle `for` es genial cuando sabes exactamente cuántas veces quieres repetir el código.
+El bucle `for` es perfecto cuando ya sabes cuántas veces necesitas repetir un bloque de código. Es más compacto que `while` y más fácil de leer en estas situaciones. ✍️
 
 ```js
 for (inicio; condición; incremento) {
@@ -67,19 +87,30 @@ for (inicio; condición; incremento) {
 
 Las partes del bucle:
 
-- **inicio**: Se ejecuta una vez antes de que empiece el bucle, normalmente para inicializar variables.
-- **condición**: Se evalúa antes de cada repetición. Si es verdadera, el bucle sigue. Si es falsa, se detiene.
-- **incremento**: Se ejecuta al final de cada repetición, usualmente para actualizar variables.
+- **inicio**: Se ejecuta una vez al inicio del bucle. Aquí se inicializan las variables.
+- **condición**: Se evalúa antes de cada iteración. Si es verdadera, el bucle sigue; si es falsa, se detiene.
+- **incremento**: Se ejecuta al final de cada iteración. Generalmente actualiza las variables de control.
 
 Ejemplo de un bucle for que muestra números del 1 al 3:
 
 ```js
 for (let i = 1; i <= 3; i++) {
-  alert(i);
+  alert(i); // muestra 1, luego 2, luego 3
+}
+```
+
+#### Bucle `for` con Arrays
+El bucle `for` es ideal para trabajar con arrays. Por ejemplo, recorrer una lista de nombres:
+
+```js
+const nombres = ["Ana", "Luis", "María"];
+for (let i = 0; i < nombres.length; i++) {
+  console.log(nombres[i]); // muestra Ana, luego Luis, luego María
 }
 ```
 
 ## 🆚 Comparación
 
-- Usa el bucle `while` cuando no sepas cuántas veces necesitarás repetir el bloque de código.
-- Usa el bucle `for` cuando ya sepas de antemano cuántas veces quieres que se ejecute el código.
+- `while`: Úsalo cuando no sabes cuántas veces necesitas repetir el código, y la cantidad de iteraciones depende de una condición dinámica.
+- `do...while`: Ideal cuando necesitas que el código se ejecute al menos una vez, incluso si la condición es inicialmente falsa.
+- `for`: La mejor opción cuando sabes de antemano cuántas veces debe repetirse el código.
