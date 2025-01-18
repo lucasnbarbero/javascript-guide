@@ -1,0 +1,107 @@
+---
+title: Estructura del Código
+sidebar:
+  order: 2
+---
+import { Aside } from "@astrojs/starlight/components";
+
+Lo primero que vamos a estudiar son los bloques de código. 📚
+
+## Sentencias
+
+Las sentencias son construcciones sintácticas y comandos que realizan acciones. 🏃‍♂️
+
+Ya vimos una sentencia simple: `alert("¡Hola, mundo!")`, que muestra el mensaje **"¡Hola, mundo!"**. 🎉
+
+Podemos tener tantas sentencias como queramos en nuestro código, y se pueden separar con un punto y coma.
+
+Por ejemplo, aquí separamos "Hola Mundo" en dos alertas:
+
+```js
+alert("Hola");
+alert("Mundo");
+```
+
+## Punto y coma
+
+En la mayoría de los casos, podemos omitir el punto y coma si existe un salto de línea. 🛑
+
+Este código también funcionaría:
+
+```js
+alert("Hola")
+alert("Mundo")
+```
+
+JavaScript interpreta el salto de línea como un punto y coma "implícito". Esto se llama **inserción automática de punto y coma**. 🔄
+
+En la mayoría de los casos, una nueva línea implica un punto y coma, pero “en la mayoría de los casos” no significa “siempre”. ⚠️
+
+Hay situaciones en las que una nueva línea no implica un punto y coma. Por ejemplo:
+
+```js
+alert(3 +
+1
++ 2);
+```
+
+Este código da como resultado 6, ya que JavaScript no inserta un punto y coma aquí. El signo de adición `+` indica que la línea está incompleta, por lo que no es necesario un punto y coma al final.
+
+**Sin embargo, hay casos donde JavaScript "falla" al asumir un punto y coma cuando realmente se necesita. 🚨**
+
+Los errores que ocurren en estas situaciones son difíciles de encontrar y corregir.
+
+<Aside type="caution" title="Ejemplo de error">
+Miremos este código:
+
+```js
+alert("Hello");
+
+[1, 2].forEach(alert);
+```
+
+Este código muestra `Hello`, luego `1`, luego `2`. Ahora, eliminemos el punto y coma del `alert`:
+
+```js
+alert("Hello")
+
+[1, 2].forEach(alert);
+```
+
+La única diferencia es que falta el punto y coma al final de la primera línea. Si ejecutamos el código, solo veremos el primer `Hello` (y un error en la consola, pero no los números). 😕
+
+Esto ocurre porque JavaScript no asume el punto y coma antes de los corchetes `[...]`. El motor de JavaScript interpreta el código como una única sentencia:
+
+```js
+alert("Hello")[1, 2].forEach(alert);
+```
+
+¡Se ve raro, ¿verdad?! Este comportamiento es incorrecto y se soluciona agregando el punto y coma. ✅
+
+Es recomendable colocar puntos y coma entre las sentencias, incluso si están separadas por saltos de línea. Esta regla está ampliamente adoptada por la comunidad. 🌍 Aunque es posible omitir los puntos y coma la mayoría del tiempo, es más seguro, especialmente para un principiante, usarlos. 🛡️
+</Aside>
+
+## Comentarios 📝
+
+A medida que nuestros programas se hacen más complejos, es importante agregar comentarios que expliquen qué hace el código y por qué. 💡
+
+Los comentarios no afectan la ejecución del código, ya que el motor simplemente los ignora. 🙈
+
+Los comentarios de una línea comienzan con dos barras diagonales //. El resto de la línea es un comentario. Puede ocupar toda la línea o seguir a una sentencia, como en este ejemplo:
+
+```js
+// Este comentario ocupa una línea propia.
+alert('Hello');
+
+alert('World'); // Este comentario sigue a la sentencia.
+```
+
+**Los comentarios de varias líneas** comienzan con `/*` y terminan con `*/`. Por ejemplo:
+
+```js
+/* Un ejemplo con dos mensajes.
+Este es un comentario multilínea.
+*/
+alert('Hola');
+alert('Mundo');
+```

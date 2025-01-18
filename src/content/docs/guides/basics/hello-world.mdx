@@ -1,0 +1,90 @@
+---
+title: Hola Mundo
+sidebar:
+  order: 1
+---
+
+import { Aside } from "@astrojs/starlight/components";
+
+A partir de esta sección, vamos a sumergirnos en el fascinante mundo de **JavaScript**. 🚀
+
+Para empezar, necesitamos un entorno de trabajo para ejecutar nuestros scripts. El navegador es una excelente opción para esto. 🌐
+
+Primero, veamos cómo podemos adjuntar un script a una página web.
+
+## 📝 `<script>`
+
+Los programas de JavaScript se pueden insertar en casi cualquier parte de un documento HTML mediante la etiqueta `<script>`. Esto nos permite ejecutar código JavaScript directamente en la página.
+
+```html {6-8}
+<!DOCTYPE html>
+<html>
+  <body>
+    <p>Antes del script...</p>
+
+    <script>
+      alert("¡Hola, mundo!");
+    </script>
+
+    <p>...Después del script.</p>
+  </body>
+</html>
+```
+
+La etiqueta `<script>` contiene código JavaScript que se ejecuta automáticamente cuando el navegador procesa la etiqueta. 🔥
+
+## 📂 Scripts externos
+
+Si tenemos un gran volumen de código JavaScript, es mejor ponerlo en un archivo separado. Esto facilita el mantenimiento y mejora la organización del proyecto. ✨
+
+Los archivos de script se adjuntan al HTML utilizando el atributo `src`:
+
+```html
+<script src="/path/to/script.js"></script>
+```
+
+También podemos usar una URL completa para cargar scripts desde una red externa. Por ejemplo:
+
+```html
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.js"></script>
+```
+
+Si necesitamos adjuntar varios scripts, podemos usar múltiples etiquetas `<script>`:
+
+```html
+<script src="/js/script1.js"></script>
+<script src="/js/script2.js"></script>
+```
+
+<Aside type="tip" title="A tener en cuenta">
+Como regla general, solo los scripts más simples se colocan directamente en el HTML. Los scripts más complejos deben ser colocados en archivos separados.
+
+La ventaja de usar archivos separados es que el navegador descargará y almacenará los scripts **en caché**. 🔄
+
+Si otras páginas hacen referencia al mismo script, lo tomarán del caché en lugar de volver a descargarlo, lo que mejora la velocidad de carga y reduce el tráfico de red. ⚡
+
+</Aside>
+
+<Aside type="caution" title="¡Cuidado!">
+  Si se establece el atributo src, el contenido dentro de la etiqueta `<script>` se ignora. 🚫
+
+No puedes mezclar un archivo externo con código dentro de la misma etiqueta `<script>`.
+
+Esto **no funcionará**:
+
+```html
+<script src="file.js">
+  alert(1); // El contenido será ignorado porque se estableció src
+</script>
+```
+
+La solución es dividir los scripts en dos etiquetas `<script>` diferentes:
+
+```html
+<script src="file.js"></script>
+<script>
+  alert(1);
+</script>
+```
+
+</Aside>

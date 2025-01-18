@@ -13,16 +13,20 @@ export default defineConfig({
       title: "Guía JavaScript",
       customCss: ["./src/styles/custom.css"],
       social: {
-        github: "https://github.com/withastro/starlight",
+        github: "https://github.com/lucasnbarbero/javascript-guide",
       },
       sidebar: [
         {
           label: "Introducción",
           items: [
-            { label: "Bienvenidos", slug: "guides/introduction" },
-            { label: "¿Qué es JavaScript?", slug: "guides/javascript" },
-            { label: "Editores de Código", slug: "guides/code-editors" },
+            { label: "Bienvenidos", slug: "guides/intro/introduction" },
+            { label: "¿Qué es JavaScript?", slug: "guides/intro/javascript" },
+            { label: "Editores de Código", slug: "guides/intro/code-editors" },
           ],
+        },
+        {
+          label: "Fundamentos",
+          autogenerate: { directory: "guides/basics" },
         },
         // {
         //   label: "Guides",
