@@ -29,6 +29,32 @@ export default defineConfig({
           autogenerate: { directory: "guides/basics" },
         },
         {
+          label: "Estructuras complejas",
+          items: [
+            {
+              label: "Arrays",
+              slug: "guides/complex-structures/arrays",
+            },
+            {
+              label: "Objetos",
+              items: [
+                {
+                  label: "Introducción",
+                  slug: "guides/complex-structures/object",
+                },
+                {
+                  label: "Referencias y copia",
+                  slug: "guides/complex-structures/object/references",
+                },
+                {
+                  label: "Métodos",
+                  slug: "guides/complex-structures/object/this",
+                },
+              ],
+            },
+          ],
+        },
+        {
           label: "Ejercicios",
           autogenerate: { directory: "guides/exercises" },
         },

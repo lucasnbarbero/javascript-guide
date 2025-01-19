@@ -1,0 +1,159 @@
+---
+title: Referencias de objetos y copia
+---
+
+Una de las diferencias clave entre objetos y tipos primitivos en JavaScript radica en cómo se almacenan y copian. Los objetos se manejan “por referencia”, mientras que los primitivos, como `string`, `number` o `boolean`, se asignan y copian "como un valor completo".
+
+Para entender esta diferencia, analicemos qué ocurre al copiar un valor.
+
+### Copia de primitivos
+
+Cuando trabajamos con primitivos, cada variable almacena una copia independiente del valor. Por ejemplo:
+
+```js
+let message = "Hello!";
+let phrase = message;
+```
+
+En este caso, tanto `message` como `phrase` contienen copias separadas del string `"Hello!"`. Son variables completamente independientes.
+
+### Copia de objetos
+
+Con los objetos, el comportamiento es diferente. **Una variable no almacena directamente el objeto, sino su “dirección en memoria”, también conocida como “referencia”**.
+
+Consideremos este ejemplo:
+
+```js
+let user = {
+  name: "John",
+};
+```
+
+Aquí, el objeto se almacena en la memoria, mientras que la variable `user` contiene una referencia a su ubicación.
+
+Cuando interactuamos con el objeto, como al acceder a `user.name`, el motor de JavaScript utiliza esa referencia para encontrar y operar sobre el objeto en memoria.
+
+Este concepto es importante porque, **cuando copiamos una variable que contiene un objeto, solo se copia la referencia, no el objeto en sí**. El resultado es que ambas variables apuntan al mismo objeto.
+
+Por ejemplo:
+
+```js
+let user = { name: "John" };
+
+let admin = user; // copia la referencia
+```
+
+Ahora, tanto `user` como `admin` referencian el mismo objeto. Cualquier cambio realizado a través de una variable será visible desde la otra:
+
+```js
+let user = { name: "John" };
+
+let admin = user;
+
+admin.name = "Pete"; // modifica el objeto a través de "admin"
+
+console.log(user.name); // 'Pete', reflejado también en "user"
+```
+
+Es similar a tener dos llaves para el mismo gabinete: ambas pueden usarse para acceder y modificar su contenido.
+
+## Clonación y mezcla con `Object.assign`
+
+Cuando copiamos un objeto, lo que realmente hacemos es crear una referencia adicional al mismo objeto en memoria. Pero, ¿qué sucede si necesitamos un duplicado completo del objeto?
+
+### Clonación manual
+
+Podemos crear un nuevo objeto y copiar sus propiedades de manera explícita:
+
+```js
+let user = {
+  name: "John",
+  age: 30,
+};
+
+let clone = {}; // objeto vacío
+
+// copiar propiedades manualmente
+for (let key in user) {
+  clone[key] = user[key];
+}
+
+// ahora "clone" es independiente
+clone.name = "Pete";
+
+console.log(user.name); // "John", el original no se modifica
+```
+
+### Usar `Object.assign`
+
+Una forma más sencilla y robusta de clonar objetos es usar el método `Object.assign`. Su sintaxis es:
+
+```js
+Object.assign(dest, ...sources);
+```
+
+- `dest`: el objeto destino donde se copiarán las propiedades.
+- `...sources`: uno o más objetos fuente.
+
+El método copia las propiedades de los objetos fuente en el objeto destino, sobrescribiendo valores existentes si es necesario.
+
+#### Ejemplo: combinar objetos
+
+```js
+let user = { name: "John" };
+
+let permissions1 = { canView: true };
+let permissions2 = { canEdit: true };
+
+// combinar propiedades
+Object.assign(user, permissions1, permissions2);
+
+console.log(user);
+// { name: "John", canView: true, canEdit: true }
+```
+
+#### Sobrescritura de propiedades
+
+Si una propiedad ya existe en el objeto destino, será sobrescrita:
+
+```js
+let user = { name: "John" };
+
+Object.assign(user, { name: "Pete" });
+
+console.log(user.name); // "Pete"
+```
+
+#### Clonación con `Object.assign`
+
+`Object.assign` también permite clonar un objeto de manera sencilla:
+
+```js
+let user = {
+  name: "John",
+  age: 30,
+};
+
+let clone = Object.assign({}, user);
+
+console.log(clone.name); // "John"
+console.log(clone.age); // 30
+```
+
+### Clonación con el operador spread
+
+Otra alternativa para clonar objetos es utilizar la sintaxis spread (`...`):
+
+```js
+let user = {
+  name: "John",
+  age: 30,
+};
+
+let clone = { ...user };
+
+console.log(clone.name); // "John"
+console.log(clone.age); // 30
+```
+
+Esta sintaxis es más concisa y ampliamente utilizada en proyectos modernos.

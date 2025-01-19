@@ -1,0 +1,118 @@
+---
+title: Metodos de objetos
+---
+
+import { Aside } from "@astrojs/starlight/components";
+
+Cuando trabajamos con objetos en JavaScript, no solo se trata de almacenar datos. ¡También pueden realizar acciones! 🎭 Los objetos suelen representar entidades del mundo real, como usuarios, órdenes, o cualquier cosa que quieras modelar.
+
+Por ejemplo, aquí tenemos un usuario básico:
+
+```js
+let user = {
+  name: "John",
+  age: 30,
+};
+```
+
+Pero un usuario no solo existe, también _actúa_: puede iniciar sesión, cerrar sesión, o decir hola 👋. Estas acciones se implementan asignando funciones a las propiedades del objeto
+
+### Ejemplos de métodos
+
+Enseñemos a nuestro usuario `user` a decir hola:
+
+```js
+let user = {
+  name: "John",
+  age: 30,
+};
+
+user.sayHi = function () {
+  alert("¡Hola! 👋");
+};
+
+user.sayHi(); // ¡Hola! 👋
+```
+
+Aquí, asignamos una función a la propiedad `sayHi`. Luego llamamos a esa función con `user.sayHi()`.
+🎉 ¡Listo! Nuestro usuario ahora puede hablar.
+
+> **Una función asignada como propiedad de un objeto se llama método.**
+
+Por lo tanto, en este caso, `sayHi` es un método del objeto `user`.
+
+<Aside type="tip" title="Programación Orientada a Objetos">
+  Cuando modelamos entidades del mundo real como objetos que contienen datos y
+  métodos, estamos usando Programación Orientada a Objetos (POO).
+</Aside>
+
+## Sintaxis abreviada para métodos ✂️
+
+JavaScript ofrece una forma más corta y elegante de escribir métodos:
+
+```js
+// Ambos objetos hacen lo mismo:
+
+user = {
+  sayHi: function () {
+    alert("Hello 🌟");
+  },
+};
+
+user = {
+  sayHi() {
+    alert("Hello 🌟");
+  },
+};
+```
+
+💡 En la segunda versión, omitimos `function` y usamos una sintaxis más compacta.
+Aunque existen pequeñas diferencias relacionadas con herencia, en la mayoría de los casos esta notación es la preferida.
+
+## `this` en métodos 🔍
+
+A menudo, los métodos necesitan acceder a la información dentro del objeto al que pertenecen.
+
+Por ejemplo, el método `sayHi()` podría necesitar el nombre del usuario:
+
+```js
+let user = {
+  name: "John",
+  age: 30,
+
+  sayHi() {
+    alert(this.name); // "this" se refiere al objeto actual
+  },
+};
+
+user.sayHi(); // John
+```
+
+¿Qué es `this`?
+
+`this` es como un súper poder 🦸. Cuando llamamos a un método como `user.sayHi()`, el valor de this es el objeto antes del punto. En este caso, this es igual a user.
+
+<Aside type="caution" title="Referenciar directamente al objeto">
+  Aunque podríamos usar el nombre del objeto en lugar de `this`, hacerlo puede causar problemas:
+
+```js
+let user = {
+  name: "John",
+  sayHi() {
+    alert(user.name); // Esto es menos flexible
+  },
+};
+```
+
+Si copiamos el objeto a otra variable, como aquí:
+
+```js
+let admin = user;
+user = null;
+
+admin.sayHi(); // ❌ TypeError: No se puede leer 'name' de null
+```
+
+¡Boom! 💥 Usar `this` evita este problema, porque siempre apunta al objeto actual.
+
+</Aside>

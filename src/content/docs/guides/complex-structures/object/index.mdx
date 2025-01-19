@@ -1,0 +1,185 @@
+---
+title: Objetos
+---
+
+En JavaScript, como vimos en el capítulo de Tipos de Datos, existen ocho tipos de datos. Siete de ellos son "primitivos", porque contienen solo un valor (como un `string` o un `number`). En contraste, los objetos permiten almacenar colecciones de datos y representar entidades más complejas mediante pares clave-valor.
+
+Los objetos son un componente fundamental en JavaScript, penetrando casi todos los aspectos del lenguaje. Comprenderlos es esencial antes de profundizar en otros temas.
+
+Podemos crear un objeto utilizando las llaves `{...}` con una lista opcional de propiedades. Una propiedad es un par "clave:valor", donde la clave (`key`) es un `string` y el valor (`value`) puede ser de cualquier tipo.
+
+### Creación de Objetos
+
+Podemos crear un objecto vacío usando las siguientes sintaxis:
+
+```js
+let user = new Object(); // Sintaxis del constructor de objetos
+let user = {}; // Sintaxis de objeto literal
+```
+
+Normalmente se uriliza la sintaxis de objeto literal `{...}`. Esta declaración es clara y concisa.
+
+## Literales y propiedades
+
+Podemos definir propiedades inmediatamente al crear un objeto usando pares "clave:valor":
+
+```js
+let user = {
+  name: "John", // Propiedad "name" con el valor "John"
+  age: 30, // Propiedad "age" con el valor 30
+};
+```
+
+En este ejemplo, el objeto `user` tiene dos propiedades:
+
+- `name` con el valor "John"
+- `age` con el valor 30
+
+Podemos agregar, eliminar y acceder a las propiedades del objeto en cualquier momento.
+
+### Acceso y modificación de propiedades
+
+Se accede a las propiedades utilizando la notación de punto:
+
+```js
+alert(user.name); // John
+alert(user.age); // 30
+```
+
+Podemos agregar nuevas propiedades directamente:
+
+```js
+user.isAdmin = true;
+```
+
+Para eliminar una propiedad, usamos el operador delete:
+
+```js
+delete user.age;
+```
+
+Si una clave contiene más de una palabra, debemos usar comillas alrededor de la clave:
+
+```js
+let user = {
+  name: "John",
+  age: 30,
+  "likes birds": true, // La clave "likes birds" requiere comillas
+};
+```
+
+### Limitaciones de la notación de punto
+
+La notación de punto no permite claves que no sean identificadores válidos (sin espacios, sin empezar con dígitos y sin caracteres especiales, salvo `$` y `_`):
+
+```js
+// Esto provoca un error
+user.likes birds = true;
+```
+
+En estos casos, usamos la notación de corchetes:
+
+```js
+user["likes birds"] = true;
+alert(user["likes birds"]); // true
+```
+
+Los corchetes también permiten usar claves calculadas o variables:
+
+```js
+let key = "likes birds";
+user[key] = true;
+```
+
+Esto ofrece flexibilidad al trabajar con claves dinámicas:
+
+```js
+let key = prompt("¿Qué te gustaría saber del usuario?", "name");
+alert(user[key]); // Por ejemplo, "John" si se ingresa "name"
+```
+
+### Atajos para definir propiedades
+
+Cuando los nombres de las propiedades coinciden con los nombres de las variables, podemos usar una sintaxis abreviada:
+
+```js
+function makeUser(name, age) {
+  return {
+    name, // Equivalente a name: name
+    age, // Equivalente a age: age
+  };
+}
+
+let user = makeUser("John", 30);
+alert(user.name); // John
+```
+
+Podemos combinar notaciones abreviadas y normales:
+
+```js
+let user = {
+  name, // Notación abreviada
+  age: 30, // Notación normal
+};
+```
+
+### Nombres de propiedades
+
+A diferencia de las variables, los nombres de las propiedades pueden incluir palabras reservadas del lenguaje:
+
+```js
+let obj = {
+  for: 1,
+  let: 2,
+  return: 3,
+};
+alert(obj.for + obj.let + obj.return); // 6
+```
+
+Las claves siempre se convierten a cadenas:
+
+```js
+let obj = {
+  0: "test", // Equivalente a "0": "test"
+};
+
+alert(obj["0"]); // test
+alert(obj[0]); // test (la misma propiedad)
+```
+
+## Iterar sobre un objeto
+
+Para recorrer todas las claves de un objeto, usamos el bucle `for...in`:
+
+```js
+for (let key in object) {
+  // Ejecuta el cuerpo para cada clave
+}
+```
+
+Por ejemplo:
+
+```js
+let user = {
+  name: "John",
+  age: 30,
+  isAdmin: true,
+};
+
+for (let key in user) {
+  alert(key); // name, age, isAdmin
+  alert(user[key]); // John, 30, true
+}
+```
+
+## Resumen
+
+- Los objetos son colecciones de pares clave-valor.
+- Las claves deben ser cadenas o símbolos, y los valores pueden ser de cualquier tipo.
+- Usamos la notación de punto (`obj.prop`) o corchetes (`obj["prop"]`) para acceder a las propiedades.
+- Operadores importantes:
+  - `delete obj.prop`: Elimina una propiedad.
+  - `"key" in obj`: Verifica si existe una clave.
+  - `for (let key in obj)`: Itera sobre las propiedades.
+
+Los objetos son una herramienta versátil y esencial en JavaScript. Comprender sus características y posibilidades es clave para dominar el lenguaje.
