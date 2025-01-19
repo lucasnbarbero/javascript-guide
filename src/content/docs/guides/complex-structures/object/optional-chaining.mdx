@@ -1,0 +1,175 @@
+---
+title: Encadenamiento opcional
+---
+
+El encadenamiento opcional (`?.`) es una herramienta poderosa y a **prueba de errores** que nos permite acceder de manera segura a propiedades, métodos y elementos de objetos, incluso si estos no existen. Si alguna parte de la cadena es `null` o `undefined`, el operador devuelve automáticamente `undefined` en lugar de generar un error.
+
+### Problema que resuelve ❓
+
+Cuando intentamos acceder a propiedades anidadas en un objeto que no está completamente definido, JavaScript lanza un error.
+
+#### 🌐 Ejemplo clásico
+
+```js
+let user = {}; // user no tiene la propiedad address
+
+console.log(user.address.street); // ❌ Error: Cannot read property 'street' of undefined
+```
+
+Este error ocurre porque `user.address` es `undefined`, y al intentar acceder a `street`, JavaScript no sabe cómo continuar.
+
+En muchos casos, en lugar de un error, quisiéramos un resultado seguro, como `undefined`, para representar que la información no está disponible.
+
+#### 💡 Soluciones tradicionales
+
+1. Usar condicionales:
+
+```js
+let street = user.address ? user.address.street : undefined;
+console.log(street); // ✅ undefined
+```
+
+Pero esta solución no es muy elegante: repetimos `user.address` varias veces. 😓
+
+2. Utilizar el operador lógico `&&`:
+
+```js
+let street = user.address && user.address.street;
+console.log(street); // ✅ undefined
+```
+
+Aunque mejora un poco, sigue siendo repetitivo y difícil de leer si la estructura es más profunda.
+
+### ¿Cómo lo resuelve el encadenamiento opcional? 🌟
+
+El operador `?.` permite acceder a propiedades, métodos o elementos de forma segura. Si encuentra `null` o `undefined` en cualquier parte de la cadena, **detiene la evaluación** y devuelve `undefined`.
+
+#### ✍️ Ejemplo con encadenamiento opcional
+
+```js
+let user = {}; // El usuario no tiene la propiedad "address"
+
+console.log(user?.address?.street); // ✅ undefined (sin errores)
+```
+
+Aquí, JavaScript verifica cada parte de la cadena:
+
+1. Si `user` es `undefined` o `null`, devuelve `undefined`.
+2. Si `user.address` es `undefined` o `null`, detiene la evaluación y devuelve `undefined`.
+3. Solo si todas las partes existen, accede a `street`.
+
+## Casos de uso prácticos 🚀
+
+### 1️⃣ Acceso a propiedades dinámicas
+
+Cuando trabajamos con datos anidados y no estamos seguros de que todas las propiedades existan.
+
+```js
+let user = {
+  profile: {
+    name: "Lucas",
+  },
+};
+
+console.log(user?.profile?.name); // ✅ "Lucas"
+console.log(user?.profile?.age); // ✅ undefined (sin errores)
+```
+
+### 2️⃣ Llamadas a métodos opcionales
+
+Con `?.()`, podemos llamar a métodos solo si existen.
+
+```js
+let userAdmin = {
+  sayHi() {
+    console.log("Hola, soy admin.");
+  },
+};
+
+let userGuest = {}; // No tiene el método "sayHi"
+
+userAdmin.sayHi?.(); // ✅ "Hola, soy admin."
+userGuest.sayHi?.(); // ✅ No hace nada (sin errores)
+```
+
+### 3️⃣ Acceso seguro a propiedades con corchetes
+
+Si necesitamos usar nombres de propiedades dinámicos, el encadenamiento opcional también funciona con corchetes `?.[]`.
+
+```js
+let key = "name";
+
+let user1 = { name: "Lucas" };
+let user2 = null; // Usuario inexistente
+
+console.log(user1?.[key]); // ✅ "Lucas"
+console.log(user2?.[key]); // ✅ undefined
+```
+
+### 4️⃣ Eliminación segura
+
+Podemos usar delete con `?.` para evitar errores al intentar borrar propiedades que podrían no existir.
+
+```js
+let user = { name: "Lucas" };
+
+delete user?.name; // ✅ Borra "name" si existe, sin errores.
+delete user?.age; // ✅ No pasa nada (sin errores).
+```
+
+## 🚀 Ventajas clave del encadenamiento opcional
+
+- **Evita errores innecesarios**: Elimina los típicos errores como `Cannot read property 'X' of undefined`.
+- **Código más limpio**: Evita duplicar verificaciones manuales con `if` o `&&`.
+- **Ahorro de tiempo y esfuerzo**: Muy útil cuando trabajamos con datos anidados (como respuestas de API).
+
+## 🔍 Short-circuiting (Cortocircuito)
+
+El operador `?.` detiene inmediatamente la evaluación si encuentra `null` o `undefined` en la parte izquierda. Esto no solo evita errores, sino que también optimiza la ejecución al no procesar innecesariamente código adicional.
+
+#### ✍️ Ejemplo práctico:
+
+```js
+let user = null;
+let x = 0;
+
+// La función no se ejecuta porque user es null
+user?.sayHi(x++);
+
+console.log(x); // ✅ 0 (x no se incrementa)
+```
+
+## 📋 Resumen de la sintaxis
+
+El encadenamiento opcional tiene tres formas principales:
+
+1. Acceso a propiedades:
+
+```js
+obj?.prop;
+```
+
+Devuelve `obj.prop` si `obj` existe, de lo contrario, `undefined`.
+
+2. Acceso dinámico a propiedades:
+
+```js
+obj?.[prop];
+```
+
+Devuelve `obj[prop]` si `obj` existe, de lo contrario, `undefined`.
+
+3. Llamadas a métodos:
+
+```js
+obj.method?.();
+```
+
+Llama a `obj.method()` si existe, de lo contrario, devuelve `undefined`.
+
+## ⚠️ Consideraciones importantes
+
+Aunque el encadenamiento opcional es muy útil, debemos usarlo con cuidado:
+
+- Solo debe aplicarse donde sea aceptable que una parte del objeto no exista.
+- No lo utilices para ocultar errores de programación, ya que podría dificultar la detección de problemas lógicos en tu código.

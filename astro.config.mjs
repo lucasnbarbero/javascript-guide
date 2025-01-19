@@ -50,6 +50,14 @@ export default defineConfig({
                   label: "Métodos",
                   slug: "guides/complex-structures/object/this",
                 },
+                {
+                  label: "Constructor",
+                  slug: "guides/complex-structures/object/constructor",
+                },
+                {
+                  label: "Encadenamiento opcional",
+                  slug: "guides/complex-structures/object/optional-chaining",
+                },
               ],
             },
           ],

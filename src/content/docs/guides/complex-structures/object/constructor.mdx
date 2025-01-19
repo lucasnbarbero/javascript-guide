@@ -1,0 +1,95 @@
+---
+title: Contructor, operador new
+---
+
+En JavaScript, normalmente usamos la sintaxis `{...}` para crear objetos. Sin embargo, cuando necesitamos crear varios objetos similares, como múltiples usuarios o elementos de menú, podemos hacerlo de forma más eficiente utilizando constructores de funciones y el operador `new`.
+
+## ¿Qué es una función constructora?
+
+Una función constructora es una función común y corriente, pero sigue **dos convenciones importantes**:
+
+- Se escribe con la primera letra mayúscula.
+- Se ejecuta usando el operador `new`.
+
+#### Ejemplo básico 👇
+
+```js
+function User(name) {
+  this.name = name;
+  this.isAdmin = false;
+}
+
+let user = new User("Jack");
+
+alert(user.name); // Jack
+alert(user.isAdmin); // false
+```
+
+Cuando ejecutamos una función con `new`, suceden estos pasos mágicos 🪄:
+
+1. Se crea un nuevo objeto vacío y se asigna a `this`.
+2. Se ejecuta el cuerpo de la función, usualmente agregando propiedades y métodos a `this`.
+3. Se devuelve el objeto `this`.
+
+Es como si hiciéramos esto manualmente:
+
+```js
+function User(name) {
+  // this = {}; (implícito)
+
+  this.name = name;
+  this.isAdmin = false;
+
+  // return this; (implícito)
+}
+```
+
+Por ejemplo, `let user = new User("Jack")` es equivalente a:
+
+```js
+let user = {
+  name: "Jack",
+  isAdmin: false,
+};
+```
+
+¡Pero es mucho más eficiente y limpio! 🌟
+
+## Métodos en constructores 🛠️
+
+Un constructor puede incluir **métodos** además de propiedades. Esto nos da flexibilidad para agregar lógica personalizada.
+
+Por ejemplo, creamos un usuario con un método para saludar:
+
+```js
+function User(name) {
+  this.name = name;
+
+  this.sayHi = function () {
+    alert("¡Hola! Mi nombre es " + this.name);
+  };
+}
+
+let john = new User("John");
+
+john.sayHi(); // ¡Hola! Mi nombre es John
+```
+
+El objeto resultante se vería así:
+
+```js
+john = {
+  name: "John",
+  sayHi: function () {
+    alert("¡Hola! Mi nombre es John");
+  },
+};
+```
+
+¡Ahora nuestro objeto no solo almacena datos, sino que también puede realizar acciones! 💪
+
+## Resumen rápido 📋
+
+- Los **constructores** son funciones normales, pero las escribimos con la primera letra en mayúscula para identificarlas.
+- Sólo deben llamarse usando el operador `new`.
+- Sirven para crear múltiples objetos similares con menos esfuerzo.
