@@ -64,6 +64,10 @@ export default defineConfig({
               label: "Map y Set",
               slug: "guides/complex-structures/map-set",
             },
+            {
+              label: "Asignación desestructurante",
+              slug: "guides/complex-structures/destructuring-assignment",
+            },
           ],
         },
         {

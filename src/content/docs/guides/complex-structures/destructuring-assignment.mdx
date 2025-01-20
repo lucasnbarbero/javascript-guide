@@ -1,0 +1,237 @@
+---
+title: Desestructuración
+---
+
+JavaScript tiene dos de las estructuras de datos más populares: objetos y arrays. Son tan útiles que siempre las estás utilizando. Pero, ¿qué pasa cuando solo necesitas una parte de esos datos? 🤔
+
+¡No te preocupes! Aquí es donde entra la desestructuración: una sintaxis mágica que te permite "desempaquetar" estas estructuras en piezas más pequeñas y manejables. 🪄✨
+
+## ¿Qué es la desestructuración? 📚
+
+La desestructuración nos permite tomar partes específicas de un array u objeto y asignarlas directamente a variables. Es como abrir un regalo y quedarte solo con lo que necesitas. 🎁
+
+## Desestructuración de Arrays
+
+Aquí hay un ejemplo simple de desestructuración de arrays:
+
+```js
+// tenemos un array con el nombre y apellido
+let arr = ["John", "Smith"];
+
+// asignación desestructurante
+// fija firstName = arr[0]
+// y surname = arr[1]
+let [firstName, surname] = arr;
+
+alert(firstName); // John
+alert(surname); // Smith
+```
+
+Ahora podemos trabajar con variables `firstName` y `surname` en lugar de `arr[0]` y `arr[1]`.
+
+#### Desestructuración no significa destructivo.
+
+Se llama “asignación desestructurante” porque “desestructura” al copiar elementos dentro de variables, pero el array en sí no es modificado.
+
+Es sólo una manera más simple de escribir:
+
+```js
+// let [firstName, surname] = arr;
+let firstName = arr[0];
+let surname = arr[1];
+```
+
+#### Ignorar elementos usando comas
+
+Los elementos no deseados de un array también pueden ser descartados mediante asignación desestructurante con ayuda de comas:
+
+```js
+// segundo elemento no es necesario
+let [firstName, , title] = ["Lucas", "Barbero", "Curso Javascript"];
+
+alert(title); // Curso Javascript
+```
+
+### El resto `...`
+
+En general, si el array es mayor que la lista de la izquierda, los ítems extras son omitidos.
+
+Por ejemplo, aquí solo dos items son tomados, el resto simplemente es ignorado:
+
+```js
+let [name, surname] = ["Lucas", "Barbero", "Curso JavaScript", "2025"];
+
+alert(name); // Lucas
+alert(surname); // Caesar
+// items posteriores no serán asignados a ningún lugar
+```
+
+Si queremos también obtener todo lo que sigue, podemos agregarle un parámetro que obtiene "el resto" usando puntos suspensivos `...`:
+
+```js
+let [name, surname, ...rest] = ["Lucas", "Barbero", "Curso JavaScript", "2025"];
+
+// `rest` es un array de ítems, comenzando en este caso por el tercero.
+alert(name); // Lucas
+alert(surname); // Barbero
+alert(rest.length); // 2
+```
+
+El valor de `rest` es un array con los elementos restantes del array original.
+
+Podemos usar cualquier otro nombre de variable en lugar de `rest`, sólo hay que asegurar que tenga tres puntos que lo antecedan y que esté último en la asignación desestructurante.
+
+```js
+let [name, surname, ...titles] = [
+  "Lucas",
+  "Barbero",
+  "Curso JavaScript",
+  "2025",
+];
+
+//  titles = ["Curso JavaScript", "2025"]
+```
+
+### Valores predeterminados
+
+Si el array es más corto que la lista de variables a la izquierda, no habrá errores. Los valores ausentes son considerados `undefined`:
+
+```js
+let [firstName, surname] = [];
+
+alert(firstName); // undefined
+alert(surname); // undefined
+```
+
+Si queremos un valor “predeterminado” para reemplazar el valor faltante, podemos proporcionarlo utilizando =:
+
+```js
+// valores predeterminados
+let [name = "Guest", surname = "Anonymous"] = ["Julius"];
+
+alert(name); // Julius (desde array)
+alert(surname); // Anonymous (predeterminado utilizado)
+```
+
+## Desestructuración de Objetos
+
+La asignación desestructurante también funciona con objetos.
+
+La sintaxis es un poco diferente, pero no mucho.
+
+```js
+let options = {
+  title: "Menu",
+  width: 100,
+  height: 200,
+};
+
+let { title, width, height } = options;
+
+alert(title); // Menu
+alert(width); // 100
+alert(height); // 200
+```
+
+Las propiedades `options.title`, `options.width` y `options.height` son asignadas a las variables correspondientes.
+
+#### El orden no importa
+
+La asignación desestructurante no se basa en el orden de las propiedades en el objeto. En cambio, se asigna por nombre.
+
+```js
+let { height, width, title } = { title: "Menu", height: 200, width: 100 };
+```
+
+Si queresmos asignar una propiedad a una variable con otro nombre, por ejemplo, que `options.width` sea asignado a `w`, podemos establecerlo así:
+
+```js
+let options = {
+  title: "Menu",
+  width: 100,
+  height: 200,
+};
+
+// { sourceProperty: targetVariable }
+let { width: w, height: h, title } = options;
+
+// width -> w
+// height -> h
+// title -> title
+
+alert(title); // Menu
+alert(w); // 100
+alert(h); // 200
+```
+
+Los dos puntos muestran **_"que:va donde"_**. En el ejemplo de arriba `width: w` significa “toma `options.width` y asignalo a `w`”.
+
+### El patrón resto `...`
+
+Podemos usar el patrón resto de la misma forma que lo usamos con arrays. Esto no es soportado en algunos navegadores antiguos, pero funciona en los navegadores modernos.
+
+```js
+let options = {
+  title: "Menu",
+  height: 200,
+  width: 100,
+};
+
+// title = propiedad llamada title
+// rest = objeto con las restantes propiedades
+let { title, ...rest } = options;
+
+// ahora title="Menu", rest={height: 200, width: 100}
+alert(rest.height); // 200
+alert(rest.width); // 100
+```
+
+### Valores predeterminados
+
+Para propiedades inexistentes, podemos establecer valores predeterminados usando `=`:
+
+```js
+let options = {
+  title: "Menu",
+};
+
+let { width = 100, height = 200, title } = options;
+
+alert(title); // Menu
+alert(width); // 100
+alert(height); // 200
+```
+
+## Desestructuración anidada
+
+Si un objeto o array contiene objetos y arrays anidados, podemos utilizar patrones del lado izquierdo más complejos para extraer porciones más profundas.
+
+En el código de abajo `options` tiene otro objeto en la propiedad `size` y un array en la propiedad `items`. El patrón en el lado izquierdo de la asignación tiene la misma estructura para extraer valores de ellos:
+
+```js
+let options = {
+  size: {
+    width: 100,
+    height: 200,
+  },
+  items: ["Cake", "Donut"],
+  extra: true,
+};
+
+// la asignación desestructurante fue dividida en varias líneas para mayor claridad
+let {
+  size: {
+    // colocar tamaño aquí
+    width,
+    height,
+  },
+  items: [item1, item2], // asignar ítems aquí
+  title = "Menu", // no se encuentra en el objeto (se utiliza valor predeterminado)
+} = options;
+
+alert(title); // Menu
+alert(width); // 100
+alert(height); // 200
+alert(item1); // Cake
+alert(item2); // Donut
+```
