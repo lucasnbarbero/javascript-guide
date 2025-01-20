@@ -4,12 +4,12 @@ title: Map y Set
 
 import { Aside } from "@astrojs/starlight/components";
 
-Hasta ahora, hemos explorado estas estructuras de datos fundamentales en JavaScript:
+Hasta ahora, hemos aprendido sobre estas estructuras de datos:
 
-- **Objetos**: Para almacenar datos como pares clave-valor.
-- **Arrays**: Para mantener colecciones ordenadas de datos.
+- **Objetos**: ideales para colecciones de datos organizadas por claves.
+- **Arrays**: perfectos para colecciones ordenadas de elementos.
 
-¡Pero en la vida real a veces necesitamos algo más flexible! Aquí es donde entran los héroes de hoy: Map y Set. 🌟
+Sin embargo, para algunos escenarios de la vida real, estas estructuras pueden quedarse cortas. Por eso tenemos a los poderosos **Map** y **Set**. 🚀
 
 ## 🔑 `Map`: La evolución de los objetos
 
@@ -48,18 +48,44 @@ console.log(map.size); // 3
 </Aside>
 
 ### ¿Cuándo usar `Map` en lugar de un objeto?
-Cuando necesitas claves que no sean strings.
-Un Map puede usar objetos, números, booleans, o cualquier otro tipo como claves, mientras que los objetos convierten todas las claves a strings.
 
-Cuando requieres un tamaño conocido.
-Con Map, puedes usar la propiedad .size para obtener el número de elementos directamente.
+1. **Cuando necesitas claves que no sean strings:** Un `Map` puede usar objetos, números, booleans, o cualquier otro tipo como claves, mientras que los objetos convierten todas las claves a strings.
+2. **Cuando requieres un tamaño conocido:** Con `Map`, puedes usar la propiedad `.size` para obtener el número de elementos directamente.
+3. **Cuando necesitas iterar fácilmente:** Los métodos de iteración como `map.keys()`, `map.values()`, y `map.entries()` son más cómodos que iterar sobre objetos.
 
-Cuando necesitas iterar fácilmente.
-Los métodos de iteración como map.keys(), map.values(), y map.entries() son más cómodos que iterar sobre objetos.
+### Ejemplo: Contar concurrencias únicas
+
+Imagina que estás desarrollando una funcionalidad para analizar una lista de usuarios activos en una app. Necesitas saber cuántas veces se ha registrado cada usuario:
+
+```js
+const users = [
+  { id: 1, name: "Alice" },
+  { id: 2, name: "Bob" },
+  { id: 1, name: "Alice" },
+  { id: 3, name: "Charlie" },
+  { id: 2, name: "Bob" },
+];
+
+const userMap = new Map();
+
+// Contamos cuántas veces aparece cada usuario
+users.forEach((user) => {
+  const currentCount = userMap.get(user.id) || 0;
+  userMap.set(user.id, currentCount + 1);
+});
+
+userMap.forEach((count, userId) => {
+  console.log(`Usuario ${userId} se registró ${count} veces.`);
+});
+// Resultado:
+// Usuario 1 se registró 2 veces.
+// Usuario 2 se registró 2 veces.
+// Usuario 3 se registró 1 vez.
+```
 
 ## 🌟 `Set`: ¡Solo valores únicos, por favor!
 
-`Set` es una colección especial que almacena **valores únicos**. Es ideal para cuando necesitas asegurarte de que no haya duplicados. 🙅‍♂️
+Un `Set` es una colección especial donde cada valor debe ser único. Es perfecto para evitar duplicados sin necesidad de validar manualmente. ¡Un salvavidas! 🛟
 
 #### Métodos y propiedades principales
 
@@ -84,6 +110,29 @@ console.log(set.size); // 2
 for (let fruit of set) {
   console.log(fruit); // "🍎", "🍌"
 }
+```
+
+### ¿Cuándo usar `Set` en lugar de un array?
+
+1. **Cuando necesitas eliminar duplicados fácilmente:** Un Set hace esto automáticamente, sin necesidad de escribir lógica adicional.
+2. **Cuando la unicidad es clave en tus datos:** Si tienes una lista donde cada valor debe ser único (como nombres de usuario o correos), usa un Set.
+
+### Ejemplo: Encontrar palabras únicas
+
+Imagina que estás creando una herramienta para analizar textos y necesitas extraer las palabras únicas de un párrafo:
+
+```js
+const paragraph = "JavaScript es increíble, y JavaScript es popular.";
+const words = paragraph.toLowerCase().match(/\w+/g); // Convertimos a minúsculas y extraemos palabras
+
+const uniqueWords = new Set(words);
+
+console.log(uniqueWords);
+// Resultado: Set { 'javascript', 'es', 'increíble', 'y', 'popular' }
+
+// Convertimos el Set a un array
+console.log([...uniqueWords]);
+// Resultado: ['javascript', 'es', 'increíble', 'y', 'popular']
 ```
 
 ## 🔄 Iterar sobre `Map` y `Set`
@@ -127,6 +176,53 @@ for (let fruit of fruits) {
 fruits.forEach((value) => {
   console.log(value); // "🍎", "🍌", "🍇"
 });
+```
+
+## Comparativa Práctica
+
+Aquí tienes una guía rápida para decidir cuándo usar `Map`, `Set`, objetos o arrays:
+
+| Necesidad                   | Usa esto | Por qué                                                              |
+| --------------------------- | -------- | -------------------------------------------------------------------- |
+| Almacenar pares clave/valor | `Map`    | Soporta cualquier tipo de clave y métodos más prácticos.             |
+| Colección de datos únicos   | `Set`    | Garantiza unicidad de valores automáticamente.                       |
+| Relación clave/valor simple | `Objeto` | Más ligero si las claves son strings y no necesitas iteración fácil. |
+| Colección ordenada de datos | `Array`  | Ideal para listas y operaciones como filtro o mapeo.                 |
+
+## Ejempo Combinado
+
+Supongamos que estamos desarrollando un sistema para registrar eventos únicos y su frecuencia.
+
+Necesitamos:
+
+1. **Evitar duplicados en los nombres de los eventos.**
+2. **Contar cuántas veces ocurre cada evento**
+
+```js
+const events = ["login", "viewPage", "login", "logout", "viewPage", "login"];
+
+// Evitamos duplicados
+const uniqueEvents = new Set(events);
+
+// Contamos frecuencia de cada evento
+const eventCount = new Map();
+
+events.forEach((event) => {
+  const currentCount = eventCount.get(event) || 0;
+  eventCount.set(event, currentCount + 1);
+});
+
+console.log("Eventos únicos:", [...uniqueEvents]);
+// Resultado: ['login', 'viewPage', 'logout']
+
+console.log("Frecuencia de eventos:");
+eventCount.forEach((count, event) => {
+  console.log(`${event}: ${count}`);
+});
+// Resultado:
+// login: 3
+// viewPage: 2
+// logout: 1
 ```
 
 ## ✨ Resumen
