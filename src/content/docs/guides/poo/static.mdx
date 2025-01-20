@@ -1,0 +1,125 @@
+---
+title: Propiedades y métodos estáticos
+---
+
+## 🛠️ Métodos `static`
+
+Un método `static` pertenece a la clase en sí misma y no a las instancias de la clase. Esto significa que puedes llamar a un método `static` sin necesidad de crear una instancia de la clase.
+
+### 🔍 ¿Para qué se usan los métodos `static`?
+
+- ⚙️ **Utilidades y helpers**: Definir funciones que no dependen del estado de una instancia específica, como operaciones comunes relacionadas con la clase.
+- 🏗️ **Funciones de fábrica**: Crear instancias de la clase de maneras específicas, manteniendo la lógica centralizada.
+- 🔑 **Acceso a propiedades estáticas**: Manipular propiedades estáticas de la clase.
+
+### ✍️ ¿Cómo se definen los métodos `static`?
+
+Usa la palabra clave `static` antes del nombre del método:
+
+```js
+class Calculadora {
+  static sumar(a, b) {
+    return a + b;
+  }
+
+  restar(a, b) {
+    return a - b;
+  }
+}
+
+console.log(Calculadora.sumar(5, 3)); // 8
+
+const calc = new Calculadora();
+console.log(calc.restar(5, 3)); // 2
+```
+
+### 🔗 Acceso a otros métodos estáticos
+
+Los métodos `static` pueden llamarse entre sí usando `this`:
+
+```js
+class Conversor {
+  static aCelsius(fahrenheit) {
+    return ((fahrenheit - 32) * 5) / 9;
+  }
+
+  static mostrarConversion(celsius) {
+    console.log(`${celsius}°C = ${this.aFahrenheit(celsius)}°F`);
+  }
+
+  static aFahrenheit(celsius) {
+    return (celsius * 9) / 5 + 32;
+  }
+}
+
+Conversor.mostrarConversion(25); // "25°C = 77°F"
+```
+
+### 📌 Consideraciones
+
+- 👥 **Herencia**: Los métodos `static` se heredan, permitiendo que las subclases los utilicen o sobrescriban.
+
+## 🏗️ Propiedades `static`
+
+Las propiedades estáticas pertenecen a la clase en sí misma, no a sus instancias, y son compartidas entre todas las instancias.
+
+### 🔍 ¿Para qué se usan las propiedades estáticas?
+
+- 📊 Variables compartidas: Datos comunes entre todas las instancias.
+- ⚠️ Datos constantes: Valores que no cambian durante el ciclo de vida de la aplicación.
+- 📈 Contadores y seguimiento: Monitoreo de estadísticas o estados relevantes para toda la clase.
+
+### ✍️ ¿Cómo se definen las propiedades `static`?
+
+Se definen con la palabra clave `static`:
+
+```js
+class Contador {
+  static contador = 0;
+
+  static incrementar() {
+    this.contador++;
+  }
+
+  static obtenerContador() {
+    return this.contador;
+  }
+}
+
+Contador.incrementar();
+console.log(Contador.obtenerContador()); // 1
+```
+
+### 👩‍👧 Herencia y propiedades estáticas
+
+Las subclases también pueden acceder y modificar propiedades estáticas:
+
+```js
+class SubContador extends Contador {
+  static mostrarContador() {
+    console.log(`Contador: ${this.contador}`);
+  }
+}
+
+SubContador.mostrarContador(); // "Contador: 1"
+```
+
+### 📌 Consideraciones
+
+- ⚡ Alcance y contexto: No se acceden desde instancias.
+- 🔄 Inicialización: Se inicializan en la declaración o métodos estáticos.
+
+```javascript
+class Ejemplo {
+  static prop1 = "Hola";
+  static prop2;
+
+  static inicializar() {
+    this.prop2 = "Mundo";
+  }
+}
+
+console.log(Ejemplo.prop1); // "Hola"
+Ejemplo.inicializar();
+console.log(Ejemplo.prop2); // "Mundo"
+```

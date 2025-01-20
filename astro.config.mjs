@@ -63,6 +63,10 @@ export default defineConfig({
           ],
         },
         {
+          label: "POO",
+          autogenerate: { directory: "guides/poo" },
+        },
+        {
           label: "Ejercicios",
           autogenerate: { directory: "guides/exercises" },
         },

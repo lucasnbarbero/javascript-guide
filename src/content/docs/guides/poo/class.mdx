@@ -1,0 +1,165 @@
+---
+title: Clases
+---
+
+Las clases en JavaScript son una forma moderna y más estructurada de crear objetos, facilitando el uso de la **programación orientada a objetos (POO)**. 🌟
+
+Con las clases, puedes definir objetos con propiedades y métodos de forma más clara y reutilizable. Veamos cómo funcionan. 👇
+
+## Sintaxis básica de `class` 📝
+
+La estructura básica de una clase es así:
+
+```js
+class MyClass {
+  // Método especial para inicializar el objeto
+  constructor() {
+    // Inicializa las propiedades del objeto
+  }
+
+  // Métodos de la clase
+  method1() { ... }
+  method2() { ... }
+  method3() { ... }
+}
+```
+
+🔑 Detalles importantes:
+
+1. `constructor()`: Es un método especial que se ejecuta automáticamente cuando creas una nueva instancia de la clase con `new`. Aquí inicializas las propiedades del objeto.
+2. **Métodos**: Son funciones que pertenecen al objeto creado con la clase.
+
+#### Ejemplo práctico
+
+```js
+class User {
+  constructor(name) {
+    this.name = name; // Inicializamos la propiedad 'name'
+  }
+
+  sayHi() {
+    console.log(`¡Hola, ${this.name}!`); // Método que usa 'name'
+  }
+}
+
+// Crear una nueva instancia de User
+let user = new User("Lucas");
+
+// Usar los métodos del objeto
+user.sayHi(); // ¡Hola, Lucas!
+```
+
+Cuando ejecutamos `new User("Lucas")`:
+
+1. Se crea un nuevo objeto.
+2. Se llama automáticamente al método `constructor`, asignando "Lucas" a la propiedad `this.name`.
+3. El objeto tiene acceso a todos los métodos definidos en la clase, como `sayHi()`.
+
+## 🔄 Expresiones de clase
+
+Las clases pueden ser usadas como expresiones, igual que las funciones. Esto significa que puedes asignarlas a variables, pasarlas como argumentos o incluso retornarlas desde otras funciones.
+
+#### Ejemplo básico
+
+```js
+let User = class {
+  sayHi() {
+    console.log("¡Hola desde una clase anónima!");
+  }
+};
+
+new User().sayHi(); // ¡Hola desde una clase anónima!
+```
+
+#### Clases con nombre
+
+Las clases pueden tener nombres internos, útiles para depuración o referencias internas:
+
+```js
+let User = class MyClass {
+  sayHi() {
+    console.log(MyClass); // MyClass es visible dentro de la clase
+  }
+};
+
+new User().sayHi(); // Muestra la definición de MyClass
+console.log(MyClass); // Error: MyClass no es visible fuera de la clase
+```
+
+## 🔑 Getters y Setters
+
+Los **getters** y **setters** permiten controlar cómo se acceden y modifican las propiedades de un objeto. Son útiles para agregar lógica adicional, como validaciones.
+
+#### Ejemplo práctico
+
+```js
+class User {
+  constructor(name) {
+    this.name = name; // Llama al setter automáticamente
+  }
+
+  // Getter: se usa al acceder a 'user.name'
+  get name() {
+    return this._name;
+  }
+
+  // Setter: se usa al asignar 'user.name = value'
+  set name(value) {
+    if (value.length < 4) {
+      console.log("El nombre es demasiado corto.");
+      return;
+    }
+    this._name = value; // Almacenamos en una propiedad privada (_name)
+  }
+}
+
+// Crear una instancia
+let user = new User("Lucas");
+console.log(user.name); // Lucas
+
+user.name = "Lu"; // El nombre es demasiado corto.
+console.log(user.name); // Lucas
+```
+
+#### Claves importantes
+
+1. `get` y `set`: Se definen como métodos pero se usan como propiedades (sin paréntesis).
+2. **Propiedades privadas**: Por convención, las propiedades internas se nombran con un guion bajo (`_nombre`).
+
+## 🏷️ Campos de clase
+
+Los **campos de clase** son propiedades declaradas directamente dentro de la clase, sin necesidad de inicializarlas en el constructor.
+
+#### Ejemplo básico
+
+```js
+class User {
+  name = "John"; // Campo de clase
+
+  sayHi() {
+    alert(`¡Hola, ${this.name}!`);
+  }
+}
+
+new User().sayHi(); // ¡Hola, John!
+```
+
+#### Asignar valores dinámicos
+
+También puedes inicializar campos con valores calculados o resultados de funciones
+
+```js
+class User {
+  name = prompt("¿Cuál es tu nombre?", "Lucas");
+}
+
+let user = new User();
+console.log(user.name); // Muestra el nombre ingresado
+```
+
+## ✅ Resumen
+
+- Las clases son una forma moderna de crear objetos y organizarlos con propiedades y métodos.
+- Los **constructores** se usan para inicializar las propiedades del objeto.
+- Los **getters** y **setters** controlan cómo se accede y modifica la información del objeto.
+- Los **campos de clase** permiten definir propiedades directamente dentro de la clase.

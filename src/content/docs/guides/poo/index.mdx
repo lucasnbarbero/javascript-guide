@@ -1,0 +1,121 @@
+---
+title: Programación Orientada a Objetos
+sidebar:
+  order: 1
+  label: Introducción
+---
+
+La **Programación Orientada a Objetos (POO)** es un paradigma muy popular en el desarrollo de software, que nos permite organizar y estructurar el código de una manera similar a cómo entendemos el mundo real. 🌍 Esto hace que la planificación, diseño, y mantenimiento de nuestras aplicaciones sea mucho más intuitivo y eficiente.
+
+Con POO, en lugar de pensar en funciones y datos separados, diseñamos **objetos** que agrupan tanto datos como comportamientos en una sola entidad. Esto facilita la reutilización de código, mejora su legibilidad, y fomenta un diseño más modular. 🛠️
+
+## ¿Por qué es importante la POO? ❓
+
+Cuando comenzamos a trabajar con programas más complejos, elegir la estructura de datos y el diseño adecuado puede marcar la diferencia entre un código fácil de mantener y un caos absoluto. 😅
+
+La POO nos da herramientas para modelar nuestro software de forma lógica y clara. Por ejemplo:
+
+- **Ejercicios simples**: No necesitamos pensar demasiado en la estructura.
+- **Ejercicios complejos**: Sin una buena organización, gestionar datos y funciones puede volverse un desafío enorme.
+
+Con POO, podemos crear estructuras **flexibles** y escalables que simplifican tanto el desarrollo inicial como los cambios futuros.
+
+## Conceptos clave de la orientación a objetos 🏛️
+
+En el corazón de la POO está el concepto de **Clase**, que actúa como un plano o plantilla para crear objetos. Una clase agrupa toda la información y funcionalidades relacionadas en un solo lugar, representando entidades del mundo real.
+
+Imagina que estás diseñando un programa para gestionar vehículos 🚗:
+
+- Una clase podría ser `Car` (Coche).
+- Cada coche específico (por ejemplo, tu auto personal) sería un objeto basado en la clase `Car`.
+
+### 📝 ¿Qué contiene una clase?
+
+#### 1️⃣ Propiedades:
+
+Son las **variables** que pertenecen a la clase y almacenan información sobre el estado del objeto.
+
+- Ejemplo: En la clase `Car`, las propiedades podrían ser `marca`, `modelo`, `color`, o `velocidadActual`.
+
+#### 2️⃣ Métodos:
+
+Son las **funciones** que definen el comportamiento de la clase, es decir, lo que el objeto puede hacer.
+
+- Ejemplo: Un método en `Car` podría ser `acelerar()`, que aumenta la velocidad del coche.
+
+## Clase vs Objeto 🔍
+
+Aunque estos términos suelen confundirse, es importante diferenciarlos:
+
+- **Clase**: Es el diseño o plano que define las propiedades y métodos comunes a todos los objetos del mismo tipo.
+
+  - Ejemplo: `class Car { ... }`
+
+- **Objeto**: Es una instancia concreta de una clase, con valores específicos en sus propiedades.
+
+      - Ejemplo: `const miAuto = new Car('Toyota', 'Corolla', 'Rojo')`;
+
+En términos sencillos, **una clase es la receta y un objeto es el pastel** 🍰 que haces siguiendo esa receta.
+
+## Ventajas de la POO 🌟
+
+1. **Modularidad y Reutilización:**
+   Diseñar código basado en clases permite dividir grandes programas en piezas más pequeñas, reutilizables y fáciles de entender.
+2. **Facilidad para mantener el código:**
+   Si algo necesita cambiar, puedes modificar una clase sin afectar el resto del programa.
+3. **Escalabilidad:**
+   A medida que un programa crece, es más fácil añadir nuevas funcionalidades sin romper lo que ya funciona.
+4. **Representación lógica:**
+   Modelar problemas del mundo real se vuelve más intuitivo al utilizar objetos que representan entidades reales.
+5. **Polimorfismo:**
+   Una funcionalidad avanzada que permite que diferentes objetos respondan de manera única a la misma acción o método.
+
+## Ejemplo práctico de POO: Gestión de vehículos
+
+Aquí tienes un ejemplo básico para ilustrar cómo organizar código usando clases:
+
+```js
+// Definimos la clase
+class Car {
+  constructor(marca, modelo, color) {
+    this.marca = marca; // Propiedad
+    this.modelo = modelo; // Propiedad
+    this.color = color; // Propiedad
+    this.velocidadActual = 0; // Estado inicial
+  }
+
+  // Método para acelerar
+  acelerar(velocidad) {
+    this.velocidadActual += velocidad;
+    console.log(
+      `${this.marca} ha acelerado a ${this.velocidadActual} km/h 🚗💨`
+    );
+  }
+
+  // Método para frenar
+  frenar() {
+    this.velocidadActual = 0;
+    console.log(`${this.marca} se ha detenido 🛑.`);
+  }
+}
+
+// Crear objetos (instancias de la clase)
+const miAuto = new Car("Toyota", "Corolla", "Rojo");
+const autoDeLucas = new Car("Ford", "Mustang", "Negro");
+
+// Interactuar con los métodos
+miAuto.acelerar(50); // Toyota ha acelerado a 50 km/h 🚗💨
+autoDeLucas.acelerar(120); // Ford ha acelerado a 120 km/h 🚗💨
+miAuto.frenar(); // Toyota se ha detenido 🛑.
+```
+
+## 🎯 Resumen clave
+
+- **Clases**: Son plantillas que definen las propiedades y métodos de los objetos.
+- **Objetos**: Son instancias concretas creadas a partir de una clase.
+- **Propiedades**: Almacenan el estado del objeto.
+- **Métodos**: Definen las acciones que un objeto puede realizar.
+
+## 💡 Tip adicional
+
+Si estás empezando, utiliza ejemplos del mundo real para modelar tus clases y objetos. Es mucho más fácil entender conceptos abstractos cuando los relacionas con algo familiar. 😊
