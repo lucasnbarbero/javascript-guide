@@ -1,0 +1,149 @@
+---
+title: Try...Catch
+---
+
+¡Nadie es perfecto! Incluso los mejores programadores nos topamos con errores en nuestros scripts. 😅 Estos pueden surgir por un descuido, datos inesperados del usuario, una respuesta incorrecta del servidor, ¡o simplemente porque así es la vida del código! 🚧
+
+Generalmente, cuando ocurre un error, el script "muere" (se detiene de golpe) y muestra el error en la consola. Sin embargo, con `try...catch`, podemos atrapar esos errores y manejarlos de manera más elegante, evitando que todo se detenga. 🛡️
+
+## ¿Cómo funciona? ✨
+
+La construcción `try...catch` tiene dos bloques principales:
+
+```js
+try {
+  // Código que puede lanzar un error
+} catch (error) {
+  // Código que se ejecuta si se lanza un error
+}
+```
+
+**¿Qué pasa detrás de escena?**
+
+1. Primero, se ejecuta el código dentro de `try {...}`.
+   Si todo sale bien, `catch` se ignora y la ejecución continúa. ✅
+   Si ocurre un error en `try`, el control salta a `catch (err)`, donde podemos manejar el problema. 🚨
+
+Un error en `try` no detendrá todo el script. ¡Nos da una oportunidad para reaccionar! 🦾
+
+#### Ejemplo sin errores 🌈
+
+```js
+try {
+  alert("Todo está funcionando bien 🎉"); // ✅
+  alert("¡Seguimos sin problemas! 🚀");
+} catch (err) {
+  alert("Este mensaje no se verá porque no hay errores 🙌");
+}
+```
+
+#### Ejemplo con errores 🔥
+
+```js
+try {
+  alert("Iniciando ejecución... ⚡");
+  noDefinida; // Error: la variable no está definida
+  alert("Este mensaje nunca se mostrará 😵");
+} catch (err) {
+  alert("¡Ups! Algo salió mal 💔");
+}
+```
+
+## ⚠️ Casos donde `try...catch` NO funciona
+
+#### Errores de sintaxis
+
+`try...catch` solo funciona con JavaScript válido. Si hay errores de sintaxis (como llaves mal cerradas), el código no se ejecutará:
+
+```js
+try {
+  {{{{{{ // 🚫 Código no válido
+} catch (err) {
+  alert("Esto no funciona porque el código no es válido");
+}
+```
+
+#### Código asíncrono
+
+Si ocurre un error en un código programado (como en un `setTimeout`), `try...catch` no lo detectará:
+
+```js
+try {
+  setTimeout(() => {
+    noExiste; // Error aquí, pero fuera de try...catch
+  }, 1000);
+} catch (err) {
+  alert("No se detectará este error 😢");
+}
+```
+
+Para manejar errores en código asíncrono, el bloque `try...catch` debe estar dentro de la función del temporizador:
+
+```js
+setTimeout(() => {
+  try {
+    noExiste; // Ahora sí, manejamos el error aquí 🛠️
+  } catch {
+    alert("¡Error detectado y manejado! 🎉");
+  }
+}, 1000);
+```
+
+---
+
+## 🛠️ El Objeto Error
+
+Cuando ocurre un error, JavaScript crea un objeto que describe el problema. Este objeto está disponible en `catch` como un argumento:
+
+```js
+try {
+  // Código...
+} catch (err) {
+  console.log(err.name); // Nombre del error
+  console.log(err.message); // Detalle del error
+  console.log(err.stack); // Pila de llamadas (útil para depurar)
+}
+```
+
+#### 🌍 Ejemplo práctico
+
+```js
+function funcionC() {
+  throw new Error("¡Error en función C!");
+}
+
+function funcionB() {
+  funcionC();
+}
+
+function funcionA() {
+  funcionB();
+}
+
+try {
+  funcionA();
+} catch (error) {
+  console.error(error.stack); // Muestra dónde ocurrió el error
+}
+```
+
+## 🎯 Lanzando tus propios errores
+
+Si necesitas inficar que algo está mal, puedes lanzar tus propios errores con `throw`:
+
+```js
+function dividir(a, b) {
+  if (b === 0) {
+    throw new Error("¡No se puede dividir por cero!");
+  }
+  return a / b;
+}
+
+try {
+  console.log(dividir(10, 0)); // Error: ¡No se puede dividir por cero!
+} catch (error) {
+  console.error(error.message);
+}
+```
+
+El operador `throw` detiene la ejecución y lanza un error. ¡Es una forma útil de comunicar problemas en tu código! 🚨

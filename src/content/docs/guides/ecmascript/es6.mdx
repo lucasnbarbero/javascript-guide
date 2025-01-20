@@ -1,0 +1,301 @@
+---
+title: ECMAScript 6
+---
+
+ES6 trajo consigo numerosos cambios significativos al lenguaje JavaScript. A continuación, exploraremos algunas de las características más destacadas:
+
+## Arrow functions ➡️
+
+Las funciones **arrow** simplifican la sintaxis de las funciones en JavaScript.
+
+```js
+// ES5
+var data = [{ ... }, { ... }, { ... }, ...];
+data.forEach(function (elem) {
+  console.log(elem);
+});
+```
+
+En ES6, lo anterior se reemplaza con una sintaxis más limpia:
+
+```js
+// ES6
+var data = [{ ... }, { ... }, { ... }, ...];
+data.forEach((elem) => {
+  console.log(elem);
+});
+```
+
+## Clases 📚
+
+ES6 introduce clases al lenguaje, lo que facilita el uso del paradigma orientado a objetos. Aunque las clases son azúcar sintáctico (_sugar syntax_), se basan en los prototipos subyacentes de JavaScript.
+
+```js
+class LibroTecnico extends Libro {
+  constructor(tematica, paginas) {
+    super(tematica, paginas);
+    this.capitulos = [];
+    this.precio = "";
+  }
+  metodo() {
+    // ...
+  }
+}
+```
+
+## `this` 🔁
+
+El contexto de `this` en JavaScript siempre ha sido un desafío. En versiones anteriores, era común asignarlo a otra variable como `that` para evitar problemas:
+
+```js
+// ES3
+var obj = {
+  foo: function () { ... },
+  bar: function () {
+    var that = this;
+    document.addEventListener("click", function (e) {
+      that.foo();
+    });
+  },
+};
+```
+
+Con las funciones **arrow**, el contexto de `this` se maneja automáticamente:
+
+```js
+// ES6
+var obj = {
+  foo: function () { ... },
+  bar: function () {
+    document.addEventListener("click", (e) => this.foo());
+  },
+};
+```
+
+`let` y `const` 🛡️
+
+`let`
+Permite declarar variables con un alcance limitado al bloque en el que se define:
+
+```js
+// ES5
+(function () {
+  if (true) {
+    var x = "hola mundo";
+  }
+  console.log(x); // "hola mundo" (var es funcionalmente global en este caso)
+})();
+
+// ES6
+(function () {
+  if (true) {
+    let x = "hola mundo";
+  }
+  console.log(x); // Error: x no está definida fuera del bloque
+})();
+```
+
+`const`
+Define constantes de solo lectura:
+
+```js
+(function () {
+  const PI = 3.14;
+  PI = 3.14159; // Error: no se puede reasignar un valor a una constante
+})();
+```
+
+## Template Strings ✨
+
+Las **template strings** facilitan la creación de cadenas dinámicas y multilínea:
+
+- **Interpolación**:
+
+```js
+let nombre = "Jonathan";
+console.log(`Hola, ${nombre}`); // Hola, Jonathan
+```
+
+- **Cadenas multilínea**:
+
+```js
+let mensaje = `No es quién eres en el interior,  
+tus actos son los que te definen... Batman`;
+console.log(mensaje);
+```
+
+- **Funciones etiquetadas (_tagged templates_)**:
+
+```js
+const etiqueta = (cadena, variable) => {
+  console.log(`${cadena[0]}${variable}`);
+};
+etiqueta`Hola ${"Ulises"}`; // Hola Ulises
+```
+
+## Desestructuración 🧩
+
+La desestructuración permite extraer valores de objetos o arrays y asignarlos a variables de manera más concisa y legible:
+
+#### Para objetos
+
+```js
+const persona = { nombre: "Juan", edad: 30 };
+const { nombre, edad } = persona;
+console.log(nombre); // "Juan"
+console.log(edad); // 30
+```
+
+#### Para arrays
+
+```js
+const numeros = [1, 2, 3];
+const [a, b] = numeros;
+console.log(a); // 1
+console.log(b); // 2
+```
+
+## Spread Operator y Rest Parameters 🌐
+
+#### Spread Operator (`...`)
+
+Permite expandir elementos de un array u objeto en otras estructuras
+
+```js
+// Spread en arrays
+const array1 = [1, 2, 3];
+const array2 = [...array1, 4, 5];
+console.log(array2); // [1, 2, 3, 4, 5]
+
+// Spread en objetos
+const obj1 = { a: 1, b: 2 };
+const obj2 = { ...obj1, c: 3 };
+console.log(obj2); // { a: 1, b: 2, c: 3 }
+```
+
+#### Rest Parameters (`...`)
+
+Permite capturar múltiples valores en un único parámetro
+
+```js
+// En funciones
+function suma(...valores) {
+  return valores.reduce((acc, val) => acc + val, 0);
+}
+console.log(suma(1, 2, 3)); // 6
+```
+
+## Módulos 📦
+
+ES6 introduce el concepto de **módulos**, lo que permite dividir el código en archivos más pequeños, manteniendo una estructura de importación y exportación. Esto mejora la organización y reutilización del código.
+
+#### Exportar un módulo
+
+```js
+// archivo.js
+export const saludo = "Hola Mundo";
+export function saludar() {
+  console.log(saludo);
+}
+```
+
+#### Importar un módulo
+
+```js
+// app.js
+import { saludo, saludar } from "./archivo.js";
+console.log(saludo); // "Hola Mundo"
+saludar(); // "Hola Mundo"
+```
+
+## Promesas 🤝
+
+Las **promesas** permiten manejar operaciones asíncronas de una manera más legible y estructurada que los callbacks, evitando el "callback hell".
+
+```js
+let promise = new Promise((resolve, reject) => {
+  let success = true;
+  if (success) {
+    resolve("Operación exitosa");
+  } else {
+    reject("Operación fallida");
+  }
+});
+
+promise
+  .then((message) => console.log(message)) // "Operación exitosa"
+  .catch((message) => console.log(message)); // En caso de error
+```
+
+## Símbolos 🔑
+
+Los **símbolos** son un nuevo tipo primitivo que se utiliza para crear identificadores únicos para propiedades de objetos, lo que permite evitar colisiones de nombres.
+
+```js
+const id = Symbol("id");
+const persona = {
+  [id]: 123,
+};
+console.log(persona[id]); // 123
+```
+
+## Iteradores y Generadores 🔄
+
+#### Iteradores
+
+Los iteradores son objetos que permiten recorrer colecciones de datos (como arrays, strings, mapas, etc.) de manera secuencial.
+
+```js
+const array = [10, 20, 30];
+const iterador = array[Symbol.iterator]();
+console.log(iterador.next().value); // 10
+console.log(iterador.next().value); // 20
+```
+
+#### Generadores
+
+Los generadores son una función especial que puede devolver múltiples valores de manera perezosa (lazy evaluation). Utilizan la palabra clave `function*` y `yield`:
+
+```js
+function* contar() {
+  yield 1;
+  yield 2;
+  yield 3;
+}
+
+const generador = contar();
+console.log(generador.next().value); // 1
+console.log(generador.next().value); // 2
+console.log(generador.next().value); // 3
+```
+
+## Mapas y Sets 🗺️
+
+#### Mapas
+
+Los **Mapas** son estructuras de datos que permiten almacenar pares de claves y valores, similar a los objetos, pero con la diferencia de que las claves pueden ser de cualquier tipo.
+
+```js
+let mapa = new Map();
+mapa.set("nombre", "Juan");
+mapa.set("edad", 30);
+console.log(mapa.get("nombre")); // "Juan"
+```
+
+#### Sets
+
+Los **Sets** permiten almacenar valores únicos (sin duplicados).
+
+```js
+let conjunto = new Set();
+conjunto.add(1);
+conjunto.add(2);
+conjunto.add(2); // No se añadirá, porque 2 ya está en el set
+console.log(conjunto); // Set { 1, 2 }
+```
+
+---
+
+## Conclusión 🎯
+
+ES6 trajo una serie de mejoras y características que han optimizado el desarrollo en JavaScript. Estas novedades han hecho que el lenguaje sea más moderno, eficiente y fácil de trabajar, brindando herramientas poderosas para manejar tanto código sincrónico como asincrónico. ¡Adelante con ES6! 🚀

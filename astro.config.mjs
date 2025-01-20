@@ -67,6 +67,14 @@ export default defineConfig({
           autogenerate: { directory: "guides/poo" },
         },
         {
+          label: "Manejo de errores",
+          autogenerate: { directory: "guides/error-handling" },
+        },
+        {
+          label: "ECMAScript",
+          autogenerate: { directory: "guides/ecmascript" },
+        },
+        {
           label: "Ejercicios",
           autogenerate: { directory: "guides/exercises" },
         },
