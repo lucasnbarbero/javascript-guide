@@ -60,6 +60,10 @@ export default defineConfig({
                 },
               ],
             },
+            {
+              label: "Map y Set",
+              slug: "guides/complex-structures/map-set",
+            },
           ],
         },
         {

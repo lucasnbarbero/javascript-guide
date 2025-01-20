@@ -1,0 +1,144 @@
+---
+title: Map y Set
+---
+
+import { Aside } from "@astrojs/starlight/components";
+
+Hasta ahora, hemos explorado estas estructuras de datos fundamentales en JavaScript:
+
+- **Objetos**: Para almacenar datos como pares clave-valor.
+- **Arrays**: Para mantener colecciones ordenadas de datos.
+
+¡Pero en la vida real a veces necesitamos algo más flexible! Aquí es donde entran los héroes de hoy: Map y Set. 🌟
+
+## 🔑 `Map`: La evolución de los objetos
+
+Un `Map` es como un objeto, pero con superpoderes: permite usar **cualquier tipo de dato como clave**. ¡Eso significa que no estás limitado a strings o símbolos! 🎉
+
+#### Métodos y propiedades principales
+
+- `new Map()`: Crea un nuevo mapa vacío.
+- `map.set(clave, valor)`: Asocia un valor a una clave.
+- `map.get(clave)`: Obtiene el valor asociado a la clave. Devuelve `undefined` si no existe.
+- `map.has(clave)`: Verifica si una clave está en el mapa.
+- `map.delete(clave)`: Elimina una clave y su valor.
+- `map.clear()`: Limpia todo el contenido del mapa.
+- `map.size`: Devuelve el número de elementos en el mapa.
+
+#### Ejemplo práctico
+
+```js
+let map = new Map();
+
+map.set("1", "string"); // Clave: string
+map.set(1, "number"); // Clave: número
+map.set(true, "boolean"); // Clave: booleano
+
+console.log(map.get(1)); // "number"
+console.log(map.get("1")); // "string"
+console.log(map.size); // 3
+```
+
+🚨 **Nota importante:** A diferencia de los objetos, las claves en un Map no se convierten a cadenas automáticamente. ¡Esto da más control y flexibilidad! 🔥
+
+<Aside type="tip" title="Evita usar map[clave]">
+  Aunque técnicamente puedes usar `map[clave]`, esto trata al mapa como un
+  objeto normal, perdiendo las ventajas de `Map`. Usa siempre los métodos como
+  `set` y `get` para trabajar correctamente. ✅
+</Aside>
+
+### ¿Cuándo usar `Map` en lugar de un objeto?
+Cuando necesitas claves que no sean strings.
+Un Map puede usar objetos, números, booleans, o cualquier otro tipo como claves, mientras que los objetos convierten todas las claves a strings.
+
+Cuando requieres un tamaño conocido.
+Con Map, puedes usar la propiedad .size para obtener el número de elementos directamente.
+
+Cuando necesitas iterar fácilmente.
+Los métodos de iteración como map.keys(), map.values(), y map.entries() son más cómodos que iterar sobre objetos.
+
+## 🌟 `Set`: ¡Solo valores únicos, por favor!
+
+`Set` es una colección especial que almacena **valores únicos**. Es ideal para cuando necesitas asegurarte de que no haya duplicados. 🙅‍♂️
+
+#### Métodos y propiedades principales
+
+- `new Set([iterable])`: Crea un nuevo conjunto, opcionalmente inicializado con un iterable (como un array).
+- `set.add(valor)`: Agrega un valor único.
+- `set.delete(valor)`: Elimina un valor. Devuelve true si existía, false si no.
+- `set.has(valor)`: Verifica si un valor existe.
+- `set.clear()`: Limpia todo el contenido del conjunto.
+- `set.size`: Retorna la cantidad de elementos en el conjunto.
+
+#### Ejemplo práctico
+
+```js
+let set = new Set();
+
+set.add("🍎");
+set.add("🍌");
+set.add("🍎"); // Este valor no se duplicará
+
+console.log(set.size); // 2
+
+for (let fruit of set) {
+  console.log(fruit); // "🍎", "🍌"
+}
+```
+
+## 🔄 Iterar sobre `Map` y `Set`
+
+Ambas estructuras soportan varias formas de iteración. Aquí algunos ejemplos:
+
+#### `Map`
+
+```js
+let recipeMap = new Map([
+  ["pepino", 500],
+  ["tomates", 350],
+  ["cebollas", 50],
+]);
+
+// Claves
+for (let vegetable of recipeMap.keys()) {
+  console.log(vegetable); // pepino, tomates, cebollas
+}
+
+// Valores
+for (let amount of recipeMap.values()) {
+  console.log(amount); // 500, 350, 50
+}
+
+// Entradas [clave, valor]
+for (let entry of recipeMap.entries()) {
+  console.log(entry); // ["pepino", 500] ...
+}
+```
+
+#### `Set`
+
+```js
+let fruits = new Set(["🍎", "🍌", "🍇"]);
+
+for (let fruit of fruits) {
+  console.log(fruit); // "🍎", "🍌", "🍇"
+}
+
+fruits.forEach((value) => {
+  console.log(value); // "🍎", "🍌", "🍇"
+});
+```
+
+## ✨ Resumen
+
+#### Map 🗺️
+
+- Claves de cualquier tipo (¡incluso objetos!).
+- Métodos útiles: `set`, `get`, `has`, `delete`.
+- Ideal cuando necesitas pares clave-valor con tipos variados.
+
+#### Set ✅
+
+- Solo almacena valores únicos.
+- Métodos clave: `add`, `has`, `delete`.
+- Perfecto para eliminar duplicados o mantener colecciones únicas.
