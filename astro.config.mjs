@@ -79,6 +79,10 @@ export default defineConfig({
           autogenerate: { directory: "guides/error-handling" },
         },
         {
+          label: "Módulos",
+          autogenerate: { directory: "guides/modules" },
+        },
+        {
           label: "ECMAScript",
           autogenerate: { directory: "guides/ecmascript" },
         },
