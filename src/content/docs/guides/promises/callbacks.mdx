@@ -1,0 +1,69 @@
+---
+title: Callbacks
+---
+
+Un **callback** es simplemente una función que se pasa como argumento a otra función 🛠️. Esto le dice a la función principal: **"Hey, cuando termines tu trabajo, ejecuta esta otra función"**. Es como darle instrucciones extra a alguien para que las siga después de hacer su tarea. 📝
+
+Por ejemplo, imagina que estás cocinando una pizza 🍕. Cuando esté lista, el horno (tu función principal) te avisa para que la saques (tu callback). ¡Eso es básicamente lo que pasa con los callbacks en código! 🎉
+
+### ¿Por qué existen los callbacks?
+
+Los callbacks son una forma súper práctica de hacer tu código más flexible y dinámico. 🚀 Aquí hay algunas razones:
+
+1. **Flexibilidad**: Puedes pasar cualquier función como callback y personalizar lo que suceda después. 🎨
+2. **Reutilización**: Te permiten crear funciones genéricas que hagan algo principal, dejando que otras funciones se encarguen de lo "personalizado". 🔄
+3. **Orden**: Ayudan a definir un flujo lógico en tus programas (aunque solo si se usan bien 😅).
+
+### ¿Cómo funcionan los callbacks? 🔍
+
+Son súper simples:
+
+1. Tienes una función principal que hace algo importante.
+2. Esa función recibe otra función como argumento (¡tu callback!).
+3. Cuando la función principal termina, ejecuta el callback.
+
+#### 💡 Ejemplo sencillo:
+
+```js
+function saludar(nombre, callback) {
+  console.log(`Hola, ${nombre}! 👋`);
+  callback();
+}
+
+saludar("Lucas", () => {
+  console.log("Esto es un callback, ¡genial! 🎉");
+});
+```
+
+📝 Salida:
+
+```
+Hola, Lucas! 👋
+Esto es un callback, ¡genial! 🎉
+```
+
+### Ventajas de los callbacks 🌟
+
+1. Organización: Ayudan a dividir el trabajo en pasos lógicos.
+2. Control: Te permiten decidir qué hacer después de una tarea, sin importar cuál sea esa tarea.
+3. Colaboración: Funcionan genial con APIs o funciones genéricas que necesitan algo personalizado.
+
+🔧 Ejemplo práctico:
+
+Supongamos que tienes una función que ordena una lista, pero quieres decidir cómo se ordena. Usando un callback:
+
+```js
+function ordenarLista(lista, callback) {
+  const listaOrdenada = lista.sort(callback);
+  console.log("Lista ordenada:", listaOrdenada);
+}
+
+ordenarLista([3, 1, 4, 2], (a, b) => a - b); // Orden ascendente
+ordenarLista([3, 1, 4, 2], (a, b) => b - a); // Orden descendente
+```
+
+### ¡Un recordatorio final! 🛑
+
+Aunque los callbacks son muy útiles, también pueden hacer el código difícil de leer si abusas de ellos. Mantén tu código limpio y usa callbacks cuando realmente lo necesites. 🧹
+
+Con esto, ya tienes claro qué son los callbacks, cómo funcionan y por qué son tan útiles. En el siguiente artículo te cuento cómo se relacionan con la asincronía y cómo manejarlo como un pro. 💪✨

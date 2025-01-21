@@ -83,6 +83,10 @@ export default defineConfig({
           autogenerate: { directory: "guides/modules" },
         },
         {
+          label: "Promesas y asincronismo",
+          autogenerate: { directory: "guides/promises" },
+        },
+        {
           label: "ECMAScript",
           autogenerate: { directory: "guides/ecmascript" },
         },
