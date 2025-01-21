@@ -1,0 +1,142 @@
+---
+title: Promesas
+---
+
+Imagina que eres un gran cantante y tus fanáticos te piden constantemente tu próxima canción. Te llenan de mensajes, gritos y emoción, pero aún no está lista, y no quieres decepcionarlos. Entonces decides hacer una promesa: **"Les enviaré la canción tan pronto como esté disponible"**. Para organizarte, creas una lista de suscripción donde tus fans pueden registrar sus direcciones de correo electrónico.
+
+¿Qué pasa después?
+
+1. Cuando la canción esté lista, todos los fans que se registraron recibirán un correo con el enlace.
+2. Si ocurre algún problema (como un incendio en el estudio 🔥), también se les notificará, aunque sea para dar malas noticias.
+
+¿Quién gana con esto?
+
+- **Tú**: Ya no tienes que responder miles de mensajes de fans.
+- **Ellos**: Se sienten tranquilos porque no se perderán el estreno.
+
+Ahora, llevemos esta analogía al mundo de la programación:
+
+- El **cantante** es un "código productor": un bloque de código que realiza un trabajo que toma tiempo, como obtener datos desde un servidor.
+- Los **fans** son "códigos consumidores": las funciones que necesitan ese resultado para continuar trabajando.
+- La **lista de suscripción** es la promesa: un objeto especial que conecta a ambos.
+
+## ¿Cómo funciona una Promesa en JavaScript?
+
+Una promesa es un objeto que representa un valor que puede estar disponible ahora, en el futuro o nunca. Tiene tres posibles estados:
+
+1. **Pendiente**: El trabajo aún está en proceso.
+2. **Cumplida**: La tarea se completó con éxito, y el resultado está listo.
+3. **Rechazada**: Ocurrió un error y no hay resultado.
+
+Cuando creamos una promesa, necesitamos especificar dos funciones clave:
+
+- `resolve`: Para indicar que todo salió bien.
+- `reject`: Para informar que ocurrió un problema.
+
+## Sintaxis de una Promesa
+
+```js
+let promesa = new Promise(function (resolve, reject) {
+  // Código productor (el cantante)
+});
+```
+
+#### ¿Qué hace este código?
+
+1. Usamos el constructor `new Promise` para crear una promesa.
+2. El constructor recibe una función llamada **ejecutor**, que se ejecuta inmediatamente cuando la promesa es creada.
+3. El ejecutor contiene la tarea que queremos realizar (por ejemplo, descargar datos).
+4. Cuando termina:
+   - Si todo salió bien, llamamos a `resolve(valor)`.
+   - Si hubo un error, usamos `reject(error)`.
+
+## Ejemplo básico: Una promesa que tarda 1 segundo en completarse
+
+```js
+let promesa = new Promise(function (resolve, reject) {
+  console.log("Preparando la canción... 🎶");
+
+  // Simulamos que el trabajo toma 1 segundo
+  setTimeout(() => resolve("¡La canción está lista!"), 1000);
+});
+```
+
+#### ¿Qué pasa aquí?
+
+1. Cuando creamos la promesa, el mensaje "Preparando la canción..." se muestra en la consola de inmediato.
+2. Después de 1 segundo, llamamos a resolve(`"¡La canción está lista!"`), cambiando el estado de la promesa a "**cumplida**".
+
+Si quisieras manejar un error, el código sería similar:
+
+```js
+let promesa = new Promise(function (resolve, reject) {
+  setTimeout(() => reject(new Error("¡Hubo un incendio en el estudio!")), 1000);
+});
+```
+
+En este caso, después de 1 segundo, el estado de la promesa sería "rechazado", con un mensaje de error.
+
+## Consumir una Promesa: ¿Cómo reciben los fans el resultado?
+
+Cuando el trabajo está listo (o falló), necesitamos una forma de notificar a los "fans". Esto se hace con los métodos:
+
+- `.then()`: Para manejar resultados exitosos.
+- `.catch()`: Para manejar errores.
+- `.finally()`: Para ejecutar algo sin importar si hubo éxito o error.
+
+#### Ejemplo práctico: Manejo de una promesa exitosa
+
+```js
+promesa.then((resultado) => {
+  console.log(resultado); // "¡La canción está lista!"
+});
+```
+
+Aquí estamos diciendo: "Cuando la promesa esté lista, muéstrame el resultado".
+
+#### Manejo de errores con `.catch()`
+
+Si algo salió mal, usamos `.catch()` para manejar el problema:
+
+```js
+promesa.catch((error) => {
+  console.log("Error:", error.message);
+});
+```
+
+Por ejemplo, si la promesa se rechazó con `reject(new Error("¡Hubo un incendio!"))`, el mensaje sería:
+
+```
+Error: ¡Hubo un incendio!
+```
+
+#### ¿Qué hace `.finally()`?
+
+Piensa en `.finally()` como el encargado de limpiar después de una fiesta 🎉. No importa si la promesa fue exitosa o fallida, `.finally()` se ejecuta de todas formas.
+
+Ejemplo con `.finally()`
+
+```js
+promesa
+  .finally(() => console.log("El proceso terminó, limpiando... 🧹"))
+  .then((resultado) => console.log("Resultado:", resultado))
+  .catch((error) => console.log("Error:", error.message));
+```
+
+¿Qué hace este código?
+
+1. `.finally()` siempre ejecuta "El proceso terminó...".
+2. Dependiendo del estado:
+   - Si todo salió bien, muestra el resultado.
+   - Si hubo un error, muestra el mensaje de error.
+
+## ¿Por qué usar Promesas?
+
+Las promesas son muy útiles para trabajar con código asincrónico. Esto significa que podemos ejecutar tareas en segundo plano (como descargar datos) sin bloquear el resto del programa.
+
+```js
+fetch("https://api.example.com/data")
+  .then((response) => response.json()) // Procesamos la respuesta
+  .then((data) => console.log("Datos recibidos:", data)) // Mostramos los datos
+  .catch((error) => console.error("Error al obtener los datos:", error)); // Manejamos errores
+```
