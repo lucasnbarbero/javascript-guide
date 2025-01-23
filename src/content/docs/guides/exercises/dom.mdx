@@ -1,0 +1,174 @@
+---
+title: DOM
+sidebar:
+  order: 7
+---
+
+import { Tabs, TabItem } from "@astrojs/starlight/components";
+
+En este proyecto, vamos a realizar el registro de reservas para el alojamiento Phoenix. Deberán crear una aplicación web que permita a los usuarios registrar a los huéspedes, validar los datos ingresados y mostrar la información de la reserva con el precio final correspondiente.
+
+## Requisitos
+
+### 1. Formulario de Registro
+
+Crear un formulario con los siguientes campos:
+
+- **Nombre** (texto)
+- **Apellido** (texto)
+- **Teléfono** (número)
+- **Email** (texto)
+- **Cantidad de días de estadía** (número)
+- **Tipo de habitación** (selección: Individual, Doble, Suite)
+
+### 2. Validaciones
+
+- **Campos Requeridos**: Todos los campos deben estar completados.
+- **Campos Numéricos**: Los campos Teléfono y Cantidad de días deben contener solo números.
+- **Cantidad de Días**: La cantidad de días debe ser mayor o igual a 1.
+- **Rango de Precios**: Validar que la cantidad de días esté dentro del rango permitido por la tabla de precios.
+
+### 3. Interacción
+
+- Al hacer clic en “Registrar huésped”, validar los datos ingresados.
+- Si los datos son inválidos, mostrar los mensajes de error correspondientes cerca del campo que tiene el error (sin usar `alert`).
+- Si los datos son válidos, agregar debajo del formulario la información del huésped junto con el precio final calculado según la tabla de precios.
+
+### 4. Tabla de Precios
+
+| Tipo de Habitación | Precio por Noche |
+| ------------------ | ---------------- |
+| Individual         | $50              |
+| Doble              | $90              |
+| Suite              | $150             |
+
+## Consideraciones
+
+- **Interacción del Usuario**: No usar `prompt` para pedir los datos al usuario, deben ingresarse en los inputs del formulario. El resultado se mostrará solo cuando el usuario presione el botón “Registrar huésped” (Ayuda: van a tener que usar un evento de JavaScript y manejarlo).
+- **Visualización**: La parte visual es importante, aunque no es necesario dejarlo hermoso (con que esté estructurado es suficiente). Usar el tiempo en resolver a nivel HTML y JavaScript, y luego agregar CSS básico.
+- **Organización del Código**: Separar el código en módulos para mantenerlo limpio y organizado, similar a cómo se hizo en el proyecto de ejemplo.
+
+## Proyecto de Ejemplo
+
+Pueden basarse en el siguiente ejemplo:
+
+<Tabs>
+  <TabItem label="HTML">
+  ```html
+  <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task List</title>
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Task List</h1>
+      <form id="taskForm">
+        <input type="text" id="taskTitle" placeholder="Task Title" />
+        <button type="submit">Add Task</button>
+      </form>
+      <ul id="taskList"></ul>
+    </div>
+  </body>
+</html>
+  ```
+  </TabItem>
+  <TabItem label="CSS">
+  
+  ```css
+  /* Estilo para el cuerpo de la página */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0;
+}
+
+/* Estilo para el contenedor principal */
+.container {
+  max-width: 800px;
+  margin: 20px auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para el encabezado */
+h1 {
+  color: #333;
+}
+
+/* Estilo para el formulario de agregar tarea */
+#taskForm {
+  margin-bottom: 20px;
+}
+
+/* Estilo para el campo de entrada de la tarea */
+#taskTitle {
+  width: calc(100% - 80px);
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+/* Estilo para el botón de agregar tarea */
+#taskForm button {
+  padding: 8px 20px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Estilo para la lista de tareas */
+#taskList {
+  list-style: none;
+  padding: 0;
+}
+
+/* Estilo para cada elemento de la lista de tareas */
+#taskList li {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+}
+
+/* Estilo para la tarea completada */
+.completed {
+  text-decoration: line-through;
+  color: #888;
+}
+
+/* Estilo para los botones de acción en cada tarea */
+li button {
+  margin-left: 10px;
+  padding: 6px 12px;
+  font-size: 14px;
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Estilo para el botón de acción 'Complete' */
+li button.complete {
+  background-color: #28a745;
+}
+
+/* Estilo para el botón de acción 'Delete' */
+li button.delete {
+  background-color: #dc3545;
+}
+```
+  </TabItem>
+</Tabs>
