@@ -1,0 +1,131 @@
+---
+title: Eventos del DOM
+sidebar:
+  order: 7
+---
+
+Hay momentos en los que necesitamos que nuestra página **reaccione mágicamente** a algo que el usuario haga, aunque no sabemos exactamente cuándo sucederá. 😮‍💨 ¿Cómo solucionamos esto? ¡Con **eventos**!
+
+## 🌟 ¿Qué es un evento?
+
+En JavaScript, un **evento** es como una notificación que dice: "¡Hey, algo interesante acaba de pasar!". 🎉 Normalmente, está relacionado con lo que el usuario hace en tu página. Por ejemplo:
+
+- 👆 **Click** en un botón.
+- ⌨️ Pulsar una tecla específica.
+- 🎶 **Reproducir** un archivo de audio o video.
+- 🖱️ **Scroll** en la página.
+- 🖨️ Activar la opción de "Imprimir página".
+
+Como desarrolladores, podemos usar estos eventos para reaccionar a las acciones del usuario y hacer que nuestra página sea interactiva. ¡Mira este ejemplo visual! 👇
+
+![](https://lenguajejs.com/javascript/eventos/que-son-eventos/eventos-javascript.png)
+
+## 🚀 Formas de manejar eventos
+
+Existen diferentes maneras de manejar eventos en JavaScript. Aquí tienes un resumen rápido:
+
+| Forma                     | Ejemplo                           |
+| ------------------------- | --------------------------------- |
+| ✍️ Atributos HTML         | `<button onClick="..."></button>` |
+| 💻 Propiedades JavaScript | `.onclick = function() { ... }`   |
+| 🎧 addEventListener()     | `.addEventListener("click", ...)` |
+
+Aunque todas estas funcionan, la forma más profesional y flexible es usando `addEventListener()`. ¡Ahora vamos a ver cada una con detalle!
+
+## 🏗️ Eventos mediante HTML
+
+La manera más sencilla (pero menos recomendada) de manejar eventos es usar atributos directamente en las etiquetas HTML. Por ejemplo:
+
+```html
+<button onClick="alert('¡Hola!')">Saludar</button>
+```
+
+¡Listo! Cuando pulses el botón, aparecerá una alerta. 🚨 Sin embargo, esta técnica mezcla JavaScript con HTML, lo que no es ideal para proyectos grandes.
+
+🔧 Mejor organizado:
+Podemos mover el código a una función:
+
+```html
+<script>
+  function sayHello() {
+    alert("¡Hola!");
+  }
+</script>
+
+<button onClick="sayHello()">Saludar</button>
+```
+
+## 💻 Usando propiedades de JavaScript
+
+Otra opción más limpia es asignar eventos usando **propiedades de JavaScript**:
+
+```html
+<button>Saludar</button>
+
+<script>
+  const button = document.querySelector("button");
+  button.onclick = function () {
+    alert("¡Hola!");
+  };
+</script>
+```
+
+Esto nos permite separar el HTML del JavaScript, ¡una gran mejora! 🧹
+
+🔍 Nota: Las propiedades como `onclick` siempre deben estar en minúsculas, ya que JavaScript distingue entre mayúsculas y minúsculas.
+
+## 🎧 El método `addEventListener()`
+
+Esta es la forma más recomendada y poderosa para manejar eventos en JavaScript. 💪
+
+Ventajas:
+
+- 🔗 Puedes asociar múltiples eventos al mismo elemento.
+- 🗑️ Permite eliminar eventos con `removeEventListener()`.
+- 🔧 Ofrece opciones adicionales para personalizar el comportamiento.
+
+Ejemplo básico
+
+```html
+<button>Haz clic</button>
+
+<script>
+  const button = document.querySelector("button");
+
+  function sayHello() {
+    alert("¡Hola!");
+  }
+
+  button.addEventListener("click", sayHello);
+</script>
+```
+
+#### ✨ Explicación:
+
+1. 🎯 Seleccionamos el botón con `querySelector()`.
+2. 🛠️ Creamos una función llamada `sayHello`.
+3. 📌 Asociamos la función al evento click usando `addEventListener()`.
+
+También podemos usar funciones anónimas o funciones flecha:
+
+```js
+button.addEventListener("click", function () {
+  alert("¡Hola desde una función anónima!");
+});
+
+button.addEventListener("click", () => alert("¡Hola con una flecha!"));
+```
+
+## 🗑️ `removeEventListener()`
+
+Este método sirve para eliminar eventos previamente asignados. 👋 Es importante usar exactamente la misma función que añadiste al evento:
+
+```js
+const button = document.querySelector("button");
+
+const action = () => alert("¡Hola!");
+button.addEventListener("click", action); // Asignar evento
+button.removeEventListener("click", action); // Eliminar evento
+```
+
+Esto es útil cuando necesitas desactivar funcionalidades dinámicamente. 🚦

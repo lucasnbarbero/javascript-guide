@@ -1,0 +1,19 @@
+---
+title: Crear elementos
+sidebar:
+  order: 3
+---
+
+# Crear elementos en el DOM
+
+Existe una serie de métodos para crear de forma eficiente diferentes elementos HTML o nodos. Estos métodos nos ofrecen una forma muy sencilla de crear estructuras dinámicas mediante bucles o estructuras definidas.
+
+## `createElement()`
+
+Mediante el método `.createElement()`, podemos crear un elemento HTML en memoria **(¡no estará insertado aún en nuestro documento HTML!)**. Una vez creado, podemos modificar sus características o contenido y, posteriormente, insertarlo en una posición determinada del DOM o documento HTML.
+
+```javascript
+const div = document.createElement("div"); // Crea un <div></div>
+const span = document.createElement("span"); // Crea un <span></span>
+const img = document.createElement("img"); // Crea un <img>
+```

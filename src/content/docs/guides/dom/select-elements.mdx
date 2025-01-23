@@ -1,0 +1,75 @@
+---
+title: Seleccionar elementos
+sidebar:
+  order: 2
+---
+
+import { Aside } from "@astrojs/starlight/components";
+
+Si queremos modificar un elemento en nuestra página HTML desde JavaScript, primero tenemos que encontrarlo 🔍. Generalmente, identificamos los elementos usando atributos como **id** o **class**. Para ello, JavaScript nos ofrece una variedad de métodos para buscar y seleccionar elementos del DOM. ¡Vamos a explorar estas herramientas! 🚀
+
+## 📜 Métodos tradicionales
+
+Los métodos clásicos son sencillos de usar, aunque algo limitados en comparación con los modernos. Aquí te dejo una lista con los más comunes:
+
+| 🛠️ Método                        | 💡 Descripción                            | ✅ Si lo encuentra…  | ❌ Si no lo encuentra…  |
+| -------------------------------- | ----------------------------------------- | -------------------- | ----------------------- |
+| `.getElementById(id)`            | Busca un elemento por su id.              | Devuelve un elemento | Devuelve `null`         |
+| `.getElementsByClassName(class)` | Busca elementos con una clase específica. | Devuelve un array    | Devuelve un array vacío |
+| `.getElementsByName(name)`       | Busca elementos con un atributo name.     | Devuelve un array    | Devuelve un array vacío |
+| `.getElementsByTagName(tag)`     | Busca elementos por su etiqueta HTML.     | Devuelve un array    | Devuelve un array vacío |
+
+Estos métodos son conocidos como tradicionales porque llevan mucho tiempo en JavaScript. Veamos algunos ejemplos prácticos. 👇
+
+#### ✨ `getElementById()`
+
+Este método busca un elemento único por su `id` (¡recuerda que los `id` deben ser únicos!). Por ejemplo:
+
+```js
+const page = document.getElementById("page");
+```
+
+#### 🧰 `.getElementsByClassName()`
+
+Si necesitas buscar varios elementos con la misma clase, este método te devuelve un array con todos los que coincidan. Por ejemplo:
+
+```js
+const items = document.getElementsByClassName("item");
+console.log(items[0]); // Primer elemento <div class="item"></div>
+console.log(items.length); // Total de elementos: 3
+```
+
+📌 Nota: Métodos como `getElementsByName()` y `getElementsByTagName()` funcionan de manera similar.
+
+```js
+const nicknames = document.getElementsByName("nickname");
+const divs = document.getElementsByTagName("div");
+```
+
+## 🚀 Métodos modernos
+
+Para quienes dominan los selectores CSS 🎨, JavaScript ofrece métodos más modernos y flexibles:
+
+#### 🎯 `querySelector()`
+
+Este método devuelve el primer elemento que coincida con el selector CSS que le pases. Si no encuentra nada, devuelve null.
+
+```javascript
+const page = document.querySelector("#page"); // <div id="page"></div>
+const info = document.querySelector(".main .info"); // <div class="info"></div>
+```
+
+#### 🌐 `querySelectorAll()`
+
+Si necesitas todos los elementos que coincidan con un selector CSS, usa este método. Devuelve un array con todos los elementos que cumplan con el criterio.
+
+```js
+const infos = document.querySelectorAll(".info");
+const nicknames = document.querySelectorAll('[name="nickname"]');
+const divs = document.querySelectorAll("div");
+```
+
+<Aside type="tip" title="Pro Tip">
+  Los selectores CSS son súper útiles para identificar elementos. Puedes usar combinaciones como etiquetas (`div`), id (`#page`) o clases (`.primary`) para obtener exactamente lo que buscas. ¡Con práctica te volverás un experto! 🧙‍♂️✨
+
+</Aside>

@@ -1,0 +1,78 @@
+---
+title: Atributos HTML
+sidebar:
+  order: 4
+---
+
+Las etiquetas HTML tienen atributos que definen su comportamiento y características. Algunos son comunes a todas las etiquetas, mientras que otros son exclusivos de ciertas etiquetas. ¡Y lo mejor! 🥳 El orden de los atributos no importa, así que puedes organizarlos como prefieras.
+
+Además, un atributo puede tener un valor o ser `boolean`, es decir, solo necesita estar presente para funcionar. 🎯
+
+```html
+<div class="container" data-attr="value">
+  <button disabled>Avisar</button>
+</div>
+```
+
+## 🔑 Acceder a atributos HTML
+
+Si ya tienes un elemento seleccionado, puedes asignar o modificar sus atributos como si fueran propiedades de un objeto: 👇
+
+```js
+const element = document.querySelector("div"); // <div class="container"></div>
+
+element.id = "page"; // <div id="page" class="container"></div>
+element.style = "color: red"; // <div id="page" class="container" style="color: red"></div>
+element.className = "data"; // <div id="page" class="data" style="color: red"></div>
+```
+
+Aunque puedes usar `className` para manejar varias clases separadas por espacios, te recomiendo usar `classList` porque es más versátil y cómodo. 💡
+
+### 📂 Diferencias entre className y classList
+
+- `className`: Trabaja con todas las clases como una sola cadena de texto. Si asignas un valor, reemplazarás todas las clases actuales.
+
+```js
+const element = document.querySelector("div");
+element.className = "newClass"; // <div class="newClass"></div>
+```
+
+- `classList`: Te permite añadir, quitar o alternar clases individuales sin afectar a las demás. 💪
+
+```js
+const element = document.querySelector("div");
+element.classList.add("newClass"); // <div class="container newClass"></div>
+element.classList.remove("container"); // <div class="newClass"></div>
+element.classList.toggle("darkMode"); // Añade o quita 'darkMode'
+const hasClass = element.classList.contains("newClass"); // true
+```
+
+## 🔍 Obtener atributos HTML
+
+Si necesitas obtener los atributos de forma directa, hay métodos muy útiles para eso. 📋
+
+| Método                        | Descripción                                              |
+| ----------------------------- | -------------------------------------------------------- |
+| `hasAttributes(): boolean`    | Verifica si el elemento tiene algún atributo.            |
+| `hasAttribute(attr): boolean` | Verifica si el atributo attr existe.                     |
+| `getAttributeNames(): array`  | Devuelve un array con todos los nombres de atributos.    |
+| `getAttribute(attr): string`  | Devuelve el valor del atributo attr o null si no existe. |
+
+Por ejemplo, con este HTML:
+
+```html
+<div id="page" class="info data dark" data-number="5"></div>
+```
+
+Podemos manipularlo con JavaScript: ✨
+
+```js
+const element = document.querySelector("#page");
+
+element.hasAttributes(); // true (tiene 3 atributos)
+element.hasAttribute("data-number"); // true (data-number existe)
+element.hasAttribute("disabled"); // false (disabled no existe)
+
+element.getAttributeNames(); // ["id", "data-number", "class"]
+element.getAttribute("id"); // "page"
+```

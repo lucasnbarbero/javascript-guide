@@ -1,0 +1,52 @@
+---
+title: Explorando el DOM
+sidebar:
+  order: 1
+---
+
+Cuando nos adentramos en el **desarrollo web** 🌟, comenzamos aprendiendo a escribir etiquetas en **HTML** y a darles estilo con **CSS** 🎨. Esto nos permite crear páginas bonitas y funcionales. Pero, conforme avanzamos, nos damos cuenta de que esto solo nos lleva hasta cierto punto.
+
+Si trabajamos únicamente con HTML y CSS, nuestras páginas serán «estáticas» 🛑, es decir, no podrán cambiar según lo que haga el usuario. Aquí es donde entra en juego **JavaScript** ✨: un superpoder que convierte esas páginas en «dinámicas», llenas de interacción, automatización y experiencias más completas. 🚀
+
+## 🤔 ¿Qué es el DOM?
+
+Las siglas **DOM** significan **Document Object Model** 📄. Básicamente, es la estructura de tu documento HTML, representada como un árbol 🌳, donde cada etiqueta HTML es una rama o nodo.
+
+Gracias a el, podemos modificar el HTML desde JavaScript:
+
+- 🛠️ **Agregar** nuevas etiquetas.
+- ✏️ **Modificar** o eliminar las existentes.
+- 🎨 **Cambiar** atributos como clases, estilos y más.
+- 🖋️ **Actualizar** el texto dentro de las etiquetas.
+
+El DOM nos da el poder de transformar nuestras páginas web en algo realmente interactivo. 🌟
+
+## 🔍 El objeto `document`
+
+En JavaScript, accedemos al DOM mediante un objeto llamado `document` 📜. Este objeto representa toda la página de la pestaña en la que estás navegando.
+
+Dentro del DOM, encontramos principalmente dos tipos de elementos:
+
+- **Element (Elemento)**: Representa etiquetas genéricas como HTMLElement.
+- **Node (Nodo)**: Una unidad más básica que puede ser un nodo de texto o un nodo elemento
+
+Por ejemplo:
+
+| Tipo genérico | Tipo específico  | Etiqueta  | Descripción            |
+| ------------- | ---------------- | --------- | ---------------------- |
+| HTMLElement   | HTMLDivElement   | `<div>`   | División en bloque 🟦  |
+| HTMLElement   | HTMLSpanElement  | `<span>`  | División en línea 🟥   |
+| HTMLElement   | HTMLImageElement | `<img>`   | Imagen 🖼️              |
+| HTMLElement   | HTMLAudioElement | `<audio>` | Contenedor de audio 🎵 |
+
+Cada etiqueta HTML tiene un tipo de dato específico que le permite comportarse de cierta manera en el DOM.
+
+## ⚙️ API nativa de JavaScript
+
+La API nativa del DOM en JavaScript es como tu caja de herramientas 🛠️. Te permite interactuar con la estructura del HTML o XML de una página. Con esta API, puedes:
+
+- Modificar el contenido de las páginas.
+- Crear experiencias interactivas.
+- Manipular elementos en tiempo real.
+
+El DOM y su API son el puente que conecta tus ideas con una web interactiva y dinámica. 🌟 ¡Es hora de explorar y experimentar con él! 🚀

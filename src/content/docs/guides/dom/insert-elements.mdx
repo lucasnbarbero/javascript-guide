@@ -1,0 +1,108 @@
+---
+title: Insertar elementos
+sidebar:
+  order: 6
+---
+
+import { Aside } from "@astrojs/starlight/components";
+
+Cuando trabajamos con el DOM, añadir elementos dinámicamente es una tarea común. Aunque `.innerHTML` puede servir para esta tarea, no siempre es la opción más eficiente ni segura. Existen métodos más controlados que nos permiten insertar elementos sin alterar otros nodos o perder event listeners. ¡Vamos a explorarlos! 🔍
+
+## 🛠️ Métodos para Manipular Elementos
+
+Aquí tienes una lista de métodos útiles para insertar, eliminar o reemplazar elementos en el DOM:
+
+| Método                     | Descripción                                                                     |
+| -------------------------- | ------------------------------------------------------------------------------- |
+| `.appendChild(node)`       | Añade un nodo como hijo al final. Devuelve el nodo insertado.                   |
+| `.removeChild(node)`       | Elimina un nodo hijo y lo devuelve.                                             |
+| `.replaceChild(new, old)`  | Reemplaza un nodo hijo (`old`) por uno nuevo (`new`). Devuelve el nodo antiguo. |
+| `.insertBefore(new, node)` | Inserta un nodo (`new`) antes de otro nodo (`node`).                            |
+| `.insertBefore(new, null)` | Inserta un nodo después del último hijo (equivalente a `.appendChild`).         |
+
+## ✨ `.appendChild()`: Añadiendo Elementos
+
+Este método permite agregar un nodo como hijo al final de todos los elementos hijos existentes.
+
+Ejemplo práctico:
+
+```js
+const container = document.querySelector(".container");
+
+// Crear un nuevo elemento <img>
+const img = document.createElement("img");
+img.src = "https://lenguajejs.com/assets/logo.svg";
+img.alt = "Logo Javascript";
+
+// Añadirlo al contenedor
+container.appendChild(img);
+```
+
+🔎 Qué sucede aquí:
+
+1. Creamos un elemento `<img>` en memoria.
+2. Configuramos sus atributos src y alt.
+3. Lo añadimos al final del contenedor .container.
+
+## 🗑️ `.removeChild()`: Eliminando Elementos
+
+Este método elimina un nodo hijo específico de su elemento padre.
+
+Ejemplo práctico:
+
+```js
+const container = document.querySelector(".container");
+const secondItem = container.querySelector(".item:nth-child(2)");
+
+// Eliminar el segundo elemento hijo
+container.removeChild(secondItem);
+```
+
+📌 Nota: Asegúrate de seleccionar el nodo correctamente antes de eliminarlo.
+
+## 🔄 `.replaceChild()`: Reemplazando Elementos
+
+Si necesitas sustituir un elemento existente por otro, este método es perfecto.
+
+Ejemplo práctico:
+
+```js
+const container = document.querySelector(".container");
+const secondItem = container.querySelector(".item:nth-child(2)");
+
+// Crear un nuevo nodo
+const newNode = document.createElement("div");
+newNode.textContent = "DOS";
+
+// Reemplazar el segundo elemento por el nuevo
+container.replaceChild(newNode, secondItem);
+```
+
+🎯 Resultado: El nodo `secondItem` será sustituido por el nuevo nodo `newNode`.
+
+## 📍 `.insertBefore()`: Insertando con Precisión
+
+Cuando necesitas insertar un nodo en una posición específica, `.insertBefore()` es tu aliado. Este método te permite añadir un nodo antes de otro nodo específico.
+
+Ejemplo práctico:
+
+```js
+const container = document.querySelector(".container");
+const secondItem = container.querySelector(".item:nth-child(2)");
+
+// Crear un nuevo nodo
+const newNode = document.createElement("div");
+newNode.textContent = "Nuevo elemento";
+
+// Insertarlo antes del segundo ítem
+container.insertBefore(newNode, secondItem);
+```
+
+💡 Dato: Si pasas `null` como segundo argumento, el nodo se añadirá al final, comportándose como `.appendChild()`.
+
+---
+
+<Aside type="tip" title="Consejo de seguridad">
+Al trabajar con estos métodos, evita usar `.innerHTML` para insertar contenido dinámico cuando el contenido proviene del usuario. Esto podría abrir la puerta a ataques de inyección de código malicioso. Usa métodos como los que vimos para manejar nodos de manera segura. 🛡️
+
+</Aside>

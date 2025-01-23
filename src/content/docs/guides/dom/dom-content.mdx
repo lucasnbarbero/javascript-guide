@@ -1,0 +1,86 @@
+---
+title: Contenido del DOM
+sidebar:
+  order: 5
+---
+
+import { Aside } from "@astrojs/starlight/components";
+
+Trabajar con contenido en el DOM desde JavaScript es clave para interactuar dinámicamente con nuestras páginas. Aquí exploraremos dos propiedades esenciales para acceder y modificar el contenido de los elementos HTML: `.textContent` y `.innerHTML`. 🚀
+
+#### Ejemplo base
+
+Imagina que tenemos el siguiente código HTML como punto de partida:
+
+```html
+<div class="container">
+  <div class="parent">
+    <p>Hola a todos.</p>
+    <p class="message">Mi nombre es <strong>Lucas</strong>.</p>
+  </div>
+</div>
+```
+
+Queremos seleccionar el párrafo con la clase `.message` y manipular su contenido. Primero, veamos las propiedades disponibles:
+
+| Propiedad      | Descripción                                                                        |
+| -------------- | ---------------------------------------------------------------------------------- |
+| `.textContent` | Obtiene o modifica el contenido de texto del elemento, ignorando el marcado HTML.  |
+| `.innerHTML`   | Obtiene o modifica el contenido HTML del elemento, incluyendo etiquetas y formato. |
+
+## 📝 `.textContent`
+
+Esta propiedad devuelve **solo el texto** dentro del elemento, sin incluir etiquetas o estructura HTML.
+
+Ejemplo:
+
+```js
+const element = document.querySelector(".message");
+
+// Leer el texto
+console.log(element.textContent); // "Mi nombre es Lucas."
+
+// Modificar el texto
+element.textContent = "Hola a todos";
+console.log(element.textContent); // "Hola a todos"
+```
+
+✅ **Beneficio**: Es más seguro usar `.textContent` para evitar posibles problemas de seguridad relacionados con HTML malicioso.
+
+## 🌟 `.innerHTML`
+
+Si necesitas trabajar con el contenido estructurado de un elemento, esta propiedad será tu mejor aliada. Con .innerHTML puedes obtener o establecer contenido HTML.
+
+Ejemplo:
+
+```js
+const element = document.querySelector(".message");
+
+// Leer el HTML
+console.log(element.innerHTML); // "Mi nombre es <strong>Lucas</strong>."
+
+// Modificar el contenido HTML
+element.innerHTML = "Hola a <em>todos</em>";
+console.log(element.innerHTML); // "Hola a <em>todos</em>"
+```
+
+⚠️ **Precaución**: Si insertas contenido dinámico (como datos del usuario) usando .innerHTML, asegúrate de validarlo para evitar **inyecciones de código malicioso**.
+
+## 💡 Diferencias Clave
+
+1. `.textContent` es más seguro y rápido para trabajar únicamente con texto.
+2. `.innerHTML` es más flexible, pero debe manejarse con cuidado para evitar problemas de seguridad.
+
+<Aside type="caution" title="Seguridad con .innerHTML">
+  ⚠️ **¡Ojo!** Al usar .innerHTML, nunca insertes datos del usuario directamente sin validarlos. Un atacante podría aprovecharse para incluir scripts maliciosos en tu página.
+
+Ejemplo de riesgo:
+
+```js
+const userInput = "<img src='x' onerror='alert(\"¡Hola!\")'>";
+element.innerHTML = userInput;
+```
+
+Para prevenir problemas, considera usar funciones de escape o alternativas más seguras.
+
+</Aside>
