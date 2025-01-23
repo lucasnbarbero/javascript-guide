@@ -294,3 +294,133 @@ contador2(); // 2
 ```
 
 ✨ **¿Por qué es útil?** Este patrón es ideal para guardar un estado privado en funciones, evitando conflictos con otras partes del código.
+
+## Spread y Rest Operators <Badge text="ES6" variant="caution" />
+
+JavaScript tiene funciones nativas súper útiles que aceptan un número arbitrario de argumentos. ¡Veamos algunos ejemplos! 🚀
+
+- 🧮 `Math.max(arg1, arg2, ..., argN)` – Devuelve el argumento más grande.
+- 📦 `Object.assign(dest, src1, ..., srcN)` – Copia las propiedades de src1...N en dest.
+- ...¡Y muchos más! 🎉
+
+### ✨ Parámetros Rest `...`
+
+Cuando llamas a una función, puedes pasarle cualquier cantidad de argumentos, ¡y JavaScript no se quejará! 💡
+
+Por ejemplo:
+
+```js
+function sum(a, b) {
+  return a + b;
+}
+
+alert(sum(1, 2, 3, 4, 5)); // 3
+```
+
+⚠️ Aquí solo se toman los dos primeros argumentos. ¿Y el resto?
+
+Usamos `...` para capturar todos los argumentos restantes en un **array**:
+
+```js
+function sumAll(...args) {
+  let sum = 0;
+
+  for (let arg of args) {
+    sum += arg;
+  }
+
+  return sum;
+}
+
+alert(sumAll(1)); // 1
+alert(sumAll(1, 2)); // 3
+alert(sumAll(1, 2, 3)); // 6
+```
+
+#### 🎭 Un ejemplo más interesante
+
+Podemos capturar los primeros parámetros como variables y el resto como un array
+
+```js
+function showName(firstName, lastName, ...titles) {
+  alert(`${firstName} ${lastName}`); // Lucas Barbero
+  alert(titles[0]); // Curso JavaScript
+  alert(titles[1]); // 2025
+  alert(titles.length); // 2
+}
+
+showName("Lucas", "Barbero", "Curso JavaScript", "2025");
+```
+
+<Aside type="caution" title="Regla importante">
+Los parámetros rest **deben** ir al final:
+
+```js
+function showName(...titles, firstName, lastName) {
+  // ❌ Error: los parámetros rest deben ir al final
+}
+```
+
+</Aside>
+
+### 🌈 Operador Spread `...`
+
+Si los parámetros rest juntan argumentos en un array, el operador **spread** (`...`) hace lo contrario: ¡expande un array en una lista de argumentos! 🪄
+
+Por ejemplo, si queremos obtener el valor máximo de un array
+
+```js
+let numbers = [1, 5, 2, 9, 3, 7];
+alert(Math.max(...numbers)); // 9
+```
+
+¡Incluso podemos combinarlo con valores normales o con otros arrays! 🤯
+
+```js
+let arr1 = [1, -2, 3, 4];
+let arr2 = [8, 3, -8, 1];
+
+alert(Math.max(0, ...arr1, 2, ...arr2, 25)); // 25
+```
+
+#### 🧩 ¿Y para combinar arrays?
+
+¡Fácil!
+
+```js
+let merged = [0, ...arr1, 2, ...arr2];
+alert(merged); // 0, 1, -2, 3, 2, 8, 3, -8
+```
+
+También funciona con cadenas, convirtiéndolas en arrays de caracteres:
+
+```js
+let str = "Hola";
+alert([...str]); // ['H', 'o', 'l', 'a']
+```
+
+### 🛠️ Copia de Objetos y Arrays
+
+El operador spread es genial para crear copias. ¡Mucho más corto y limpio que `Object.assign`! 💡
+
+#### Copia de un array
+
+```js
+let arr = [1, 2, 3];
+let arrCopy = [...arr];
+
+alert(JSON.stringify(arr) === JSON.stringify(arrCopy)); // true
+alert(arr === arrCopy); // false
+```
+
+#### Copia de un objeto
+
+```js
+let obj = { a: 1, b: 2 };
+let objCopy = { ...obj };
+
+alert(JSON.stringify(obj) === JSON.stringify(objCopy)); // true
+alert(obj === objCopy); // false
+```
+
+¡Además, las copias son independientes! Cambiar el original no afecta la copia. 🙌

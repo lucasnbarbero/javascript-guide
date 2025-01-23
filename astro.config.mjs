@@ -64,6 +64,10 @@ export default defineConfig({
               label: "Map y Set",
               slug: "guides/complex-structures/map-set",
             },
+            {
+              label: "Asignación desestructurante",
+              slug: "guides/complex-structures/destructuring-assignment",
+            },
           ],
         },
         {
@@ -73,6 +77,14 @@ export default defineConfig({
         {
           label: "Manejo de errores",
           autogenerate: { directory: "guides/error-handling" },
+        },
+        {
+          label: "Módulos",
+          autogenerate: { directory: "guides/modules" },
+        },
+        {
+          label: "Promesas y asincronismo",
+          autogenerate: { directory: "guides/promises" },
         },
         {
           label: "DOM",

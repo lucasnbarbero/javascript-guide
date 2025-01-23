@@ -1,0 +1,195 @@
+---
+title: Módulos, introducción
+---
+
+import { Tabs, TabItem } from "@astrojs/starlight/components";
+
+Imagina que tu aplicación esta creciendo 🚀.Cuando eso pasa, es común querer dividir el código en pequeños archivos más manejables, llamados **módulos**. Cada módulo tiene una misión: puede ser una clase o un conjunto de funciones para resolver un propósito específico. 📂✨
+
+Durante muchos años, JavaScript vivió sin una sintaxis de módulos integrada en el lenguaje. ¿Por qué? Porque en sus inicios, los scripts eran pequeñitos y sencillos. 🐣 Pero, con el tiempo, los proyectos crecieron y se complicaron, así que la comunidad empezó a crear maneras de organizar el código en módulos. ¡La creatividad no faltó! 🎨
+
+Aquí tienes algunos ejemplos históricos:
+
+- **AMD**: uno de los primeros sistemas de módulos, implementado con la biblioteca `require.js`.
+- **CommonJS**: un sistema diseñado para Node.js, enfocado en el servidor.
+- **UMD**: una solución "universal" para ser compatible con AMD y CommonJS.
+
+Aunque estas soluciones ya son más historia que presente 📜, todavía puedes encontrar scripts viejitos usándolas.
+
+En 2015, JavaScript incorporó **módulos modernos** como estándar oficial. Desde entonces, estos han evolucionado y ahora son compatibles con todos los navegadores principales 🌐 y con Node.js. ¡Así que llegó el momento de aprenderlos y sacarles el máximo provecho! 🎉
+
+## 📁 ¿Qué son los módulos?
+
+Un **módulo** es simplemente un archivo de JavaScript. 📝 Sí, un archivo común y corriente. Lo genial es que los módulos pueden "hablar" entre sí usando las palabras mágicas `export` e `import`.
+
+¿Cómo funcionan?
+
+- **export**: etiqueta las variables o funciones que quieres compartir con otros módulos.
+- **import**: permite usar esas funciones o variables en otro módulo.
+
+Por ejemplo, imaginemos que tienes un archivo llamado `sayHi.js` que exporta una función para saludar:
+
+```js
+// 📁 sayHi.js
+export function sayHi(user) {
+  alert(`Hola, ${user}!`);
+}
+```
+
+Ahora, otro archivo puede importarlo y usarlo:
+
+```js
+// 📁 main.js
+import { sayHi } from "./sayHi.js";
+
+sayHi("Lucas"); // Muestra: Hola, Lucas!
+```
+
+¡Así de simple! La directiva `import` busca el archivo indicado (`./sayHi.js` en este caso), lo carga y te da acceso a la función `sayHi`. 🚀
+
+Para que esto funcione en el navegador, debemos decirle que estamos usando módulos. Lo hacemos con el atributo `<script type="module">`. Por ejemplo:
+
+<Tabs syncKey="pkg">
+<TabItem label="say.js">
+
+```js
+export function sayHi(user) {
+  return `Hello, ${user}!`;
+}
+```
+
+</TabItem>
+<TabItem label="index.html">
+
+```html
+<script type="module">
+  import { sayHi } from "./sayHi.js";
+  sayHi("Lucas");
+</script>
+```
+
+</TabItem>
+
+</Tabs>
+
+El navegador automáticamente encuentra y ejecuta el módulo importado. ✅
+
+#### 🚨 ¡Cuidado con los módulos y los archivos locales!
+
+Los módulos solo funcionan a través de HTTP(s). Si intentas abrir tu archivo HTML directamente desde tu computadora (usando `file://`), las directivas `import` y `export` no funcionarán. ❌
+
+¿Qué hacer?
+Usa un servidor local, como `static-server`, o extensiones como **Live Server** en VS Code. Así todo funcionará como debería. 🌐🔧
+
+## 🌟 Características principales de los módulos
+
+Los módulos tienen algunas diferencias importantes frente a los scripts “normales”. Aquí te las explico:
+
+#### 1. Siempre están en modo estricto
+
+Cuando usas módulos, JavaScript automáticamente aplica el modo estricto. Esto significa que no puedes hacer cosas como usar variables sin declararlas. Por ejemplo:
+
+```js
+<script type="module">
+  a = 5; // Error: ¡debes declarar la variable primero!
+</script>
+```
+
+#### 2. Alcance propio
+
+Cada módulo tiene su propio "mundo". 🌍 Las variables y funciones definidas en un módulo no son visibles desde otros. Si necesitas compartir algo, debes usar export e import.
+
+<Tabs syncKey="pkg">
+<TabItem label="hello.js">
+
+```js
+alert(user); // no existe tal variable (cada módulo tiene variables independientes)
+```
+
+</TabItem>
+<TabItem label="user.js">
+
+```js
+let user = "John";
+```
+
+</TabItem>
+<TabItem label="index.html">
+
+```html
+<!DOCTYPE html>
+<script type="module" src="user.js"></script>
+<script type="module" src="hello.js"></script>
+```
+
+</TabItem>
+
+</Tabs>
+
+Si no exportas nada, el módulo será como un castillo cerrado 🔒.
+
+#### 3. Evaluación única
+
+El código de un módulo solo se ejecuta una vez, incluso si se importa desde varios lugares. Eso significa que cualquier cosa que ocurra al cargar el módulo (como mostrar un mensaje) sucede solo la primera vez. 🕒
+
+<Tabs syncKey="pkg">
+<TabItem label="alert.js">
+
+```js
+alert("Módulo cargado!");
+```
+
+</TabItem>
+<TabItem label="main.js">
+
+```js
+import "./alert.js"; // Muestra: Módulo cargado!
+import "./alert.js"; // No muestra nada esta vez.
+```
+
+</TabItem>
+
+</Tabs>
+
+## 💡 ¡Trucos y consejos prácticos!
+
+#### 1. Configura tus módulos
+
+Puedes exportar objetos o funciones configurables. Por ejemplo, un módulo `admin.js` podría exportar un objeto vacío y luego configurarlo desde otro archivo:
+
+<Tabs syncKey="pkg">
+<TabItem label="admin.js">
+
+```js
+export let config = {};
+
+export function sayHi() {
+  alert(`Hola, ${config.user}!`);
+}
+```
+
+</TabItem>
+<TabItem label="init.js">
+
+```js
+import { config } from "./admin.js";
+config.user = "Lucas";
+```
+
+</TabItem>
+
+</Tabs>
+
+#### 2. `import.meta`
+
+El objeto `import.meta` te da información sobre el módulo actual, como su URL. Esto es útil para identificar desde dónde se está ejecutando el código. 🌐
+
+```js
+<script type="module">
+  console.log(import.meta.url); // Muestra la URL del script
+</script>
+```
+
+#### 3. Evita usar `this`
+
+En los módulos, el nivel superior `this` es `undefined`. Esto es diferente de los scripts normales, donde `this` es el objeto global (`window` en navegadores). 🧐

@@ -1,0 +1,154 @@
+---
+title: Export e Import
+---
+
+import { Aside } from "@astrojs/starlight/components";
+
+Las directivas `export` e `import` son esenciales para trabajar con módulos en JavaScript. En este artículo, exploraremos a fondo cómo utilizarlas, con ejemplos prácticos que harán que domines este tema como un profesional. 🚀
+
+🏷️ Export antes de las sentencias
+Cualquier cosa en JavaScript puede "etiquetarse" como exportable: variables, funciones, clases, ¡tú eliges! Solo necesitas anteponer export. Por ejemplo:
+
+```js
+// Exportar un array
+export let months = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
+
+// Exportar una constante
+export const MODULES_BECAME_STANDARD_YEAR = 2015;
+
+// Exportar una clase
+export class User {
+  constructor(name) {
+    this.name = name;
+  }
+}
+```
+
+<Aside type="tip">
+  No necesitas un punto y coma después de exportar una clase o función porque
+  siguen siendo declaraciones, no expresiones. ¡Menos confusión! 😄
+</Aside>
+
+## ✂️ Export por separado
+
+No es obligatorio exportar algo justo al declararlo. Puedes exportar todo junto más abajo en el archivo. Ejemplo:
+
+```js
+// 📁 say.js
+function sayHi(user) {
+  alert(`Hello, ${user}!`);
+}
+
+function sayBye(user) {
+  alert(`Bye, ${user}!`);
+}
+
+// Exportar al final
+export { sayHi, sayBye };
+```
+
+Esto te permite estructurar tu código primero y luego decidir qué quieres hacer público. 🧐
+
+## 🌌 Importar todo con `import *`
+
+¿Demasiadas cosas para importar? ¡Agrúpalas en un solo objeto! Así:
+
+```js
+// 📁 main.js
+import * as say from "./say.js";
+
+say.sayHi("John"); // Hello, John!
+say.sayBye("John"); // Bye, John!
+```
+
+#### 📋 Ventajas de importar explícitamente:
+
+1. Usas nombres más cortos: `sayHi()` en lugar de say.`sayHi()`.
+2. Tienes un panorama más claro de lo que estás usando y dónde. Esto ayuda mucho en la refactorización.
+
+## 🧩 Importar y exportar con alias
+
+¿Necesitas cambiar el nombre de algo para hacerlo más claro? Usa `as`:
+
+```js
+// 📁 main.js
+import { sayHi as hi, sayBye as bye } from "./say.js";
+
+hi("John"); // Hello, John!
+bye("John"); // Bye, John!
+```
+
+Lo mismo aplica al exportar:
+
+```js
+// 📁 say.js
+export { sayHi as hi, sayBye as bye };
+```
+
+Ahora, al importar, puedes usar estos nombres más amigables. 🌟
+
+## ⭐ Export default: El especial
+
+Cuando un módulo tiene una "estrella principal", como una clase o función que representa su propósito, usamos `export default`:
+
+```js
+// 📁 user.js
+export default class User {
+  constructor(name) {
+    this.name = name;
+  }
+}
+```
+
+La gran ventaja: no necesitas llaves al importar, y puedes nombrarla como quieras:
+
+```js
+// 📁 main.js
+import User from "./user.js";
+
+new User("John");
+```
+
+¡Súper limpio y fácil de usar! 🎉
+
+## 🤝 Exportaciones con nombre vs default
+
+| Export con nombre         | Export default              |
+| ------------------------- | --------------------------- |
+| `export class User {...}` | `export default class User` |
+| `import { User }`         | `import User`               |
+
+<Aside type="caution" title="Cuidado">
+  Mientras las exportaciones con nombre son claras y obligan a usar nombres
+  exactos, las default pueden ser renombradas al importar. Esto podría llevar a
+  inconsistencias si no tienes cuidado. 🤔
+</Aside>
+
+## 🔄 Reexportación: Modularizando como un pro
+
+La reexportación te permite organizar tu código en módulos más pequeños, exponiendo solo lo necesario desde un punto central. Ejemplo:
+
+```js
+// 📁 auth/index.js
+export { login, logout } from "./user.js";
+export { default as User } from "./user.js";
+```
+
+Ahora, quien quiera usar tu paquete puede hacerlo de forma sencilla:
+
+```js
+import { login, logout } from "auth/index.js";
+import User from "auth/index.js";
+```
+
+🗂️ Este enfoque es perfecto para proyectos grandes con muchas dependencias internas. ¡Organización al máximo! 🚀
