@@ -1,0 +1,170 @@
+---
+title: Promesas
+sidebar:
+  order: 8
+---
+
+import { Tabs, TabItem } from "@astrojs/starlight/components";
+
+Hoy les traigo un ejercicio para que practiquen **promesas**, **manipulación del DOM** y un poco de **eventos dinámicos**. 😎 Vamos a consumir datos de una API de prueba y a mostrar la información de forma interactiva. ¿Listos? ¡Manos a la obra! 🛠️
+
+---
+
+## Desafío 💡
+
+Vamos a crear una lista dinámica de usuarios obtenida desde la API de [JSONPlaceholder](https://jsonplaceholder.typicode.com/). No solo vamos a mostrar los nombres, ¡también implementaremos una búsqueda en tiempo real para filtrar los usuarios según lo que escriban! 🔤
+
+## Requisitos 📋
+
+1. **Consumir la API**
+   Usa fetch para obtener los datos de la URL:
+
+```plaintext
+https://jsonplaceholder.typicode.com/users
+```
+
+Cuando la información llegue correctamente, muestra los nombres y correos electrónicos de los usuarios en una lista.
+
+2. **Mostrar en el DOM**
+   Crea un contenedor en tu HTML donde puedas mostrar los usuarios. Cada usuario debe incluir:
+
+- Nombre 🧑‍💻
+- Email 📧
+
+3. **Búsqueda en tiempo real**
+   Añade un campo de texto encima de la lista donde los usuarios puedan escribir un nombre o correo.
+
+- Mientras escriben, actualiza la lista para mostrar solo los usuarios que coincidan con el texto ingresado.
+- Si no hay coincidencias, muestra un mensaje como: "No se encontraron usuarios."
+
+4. Manejo de errores
+   Si hay un problema al obtener los datos de la API, muestra un mensaje de error amigable para el usuario (¡sin `alert`! 😅).
+
+## Pista inicial 👇
+
+Aquí te dejo un punto de partida para que vayas rápido:
+
+<Tabs>
+  <TabItem label="HTML">
+  ```html
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Usuarios</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+    <h1>📋 Lista de Usuarios</h1>
+    <div class="search-container">
+      <input 
+        type="text" 
+        id="search" 
+        placeholder="Escribe un nombre o correo..." 
+        aria-label="Buscar usuarios"
+      />
+    </div>
+    <ul id="userList"></ul>
+    <div id="errorMessage" class="hidden">❌ Error al cargar los usuarios. Intenta nuevamente.</div>
+    <div id="noResultsMessage" class="hidden">🔍 No se encontraron usuarios.</div>
+  </div>
+</body>
+</html>
+  ```
+  </TabItem>
+  <TabItem label="CSS">
+  ```css
+    /* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/_ Estilo del body _/
+body {
+font-family: 'Arial', sans-serif;
+background-color: #f9f9f9;
+color: #333;
+line-height: 1.6;
+padding: 20px;
+}
+
+/_ Contenedor principal _/
+#app {
+max-width: 600px;
+margin: 0 auto;
+background: #fff;
+border-radius: 8px;
+box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+padding: 20px;
+}
+
+/_ Título _/
+h1 {
+text-align: center;
+margin-bottom: 20px;
+color: #007bff;
+}
+
+/_ Contenedor de búsqueda _/
+.search-container {
+margin-bottom: 20px;
+}
+
+/_ Campo de búsqueda _/
+#search {
+width: 100%;
+padding: 10px;
+font-size: 16px;
+border: 1px solid #ddd;
+border-radius: 4px;
+outline: none;
+transition: border-color 0.2s;
+}
+
+#search:focus {
+border-color: #007bff;
+}
+
+/_ Lista de usuarios _/
+#userList {
+list-style: none;
+padding: 0;
+}
+
+#userList li {
+background: #f4f4f4;
+margin-bottom: 10px;
+padding: 15px;
+border-radius: 4px;
+display: flex;
+flex-direction: column;
+border: 1px solid #ddd;
+}
+
+#userList li span {
+font-size: 14px;
+color: #555;
+}
+
+/_ Mensajes de error y sin resultados _/
+.hidden {
+display: none;
+}
+
+#errorMessage,
+#noResultsMessage {
+text-align: center;
+color: #dc3545;
+font-weight: bold;
+margin-top: 20px;
+}
+
+    ```
+
+  </TabItem>
+  
+</Tabs>

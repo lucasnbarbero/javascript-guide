@@ -227,48 +227,6 @@ promise
   .catch((message) => console.log(message)); // En caso de error
 ```
 
-## Símbolos 🔑
-
-Los **símbolos** son un nuevo tipo primitivo que se utiliza para crear identificadores únicos para propiedades de objetos, lo que permite evitar colisiones de nombres.
-
-```js
-const id = Symbol("id");
-const persona = {
-  [id]: 123,
-};
-console.log(persona[id]); // 123
-```
-
-## Iteradores y Generadores 🔄
-
-#### Iteradores
-
-Los iteradores son objetos que permiten recorrer colecciones de datos (como arrays, strings, mapas, etc.) de manera secuencial.
-
-```js
-const array = [10, 20, 30];
-const iterador = array[Symbol.iterator]();
-console.log(iterador.next().value); // 10
-console.log(iterador.next().value); // 20
-```
-
-#### Generadores
-
-Los generadores son una función especial que puede devolver múltiples valores de manera perezosa (lazy evaluation). Utilizan la palabra clave `function*` y `yield`:
-
-```js
-function* contar() {
-  yield 1;
-  yield 2;
-  yield 3;
-}
-
-const generador = contar();
-console.log(generador.next().value); // 1
-console.log(generador.next().value); // 2
-console.log(generador.next().value); // 3
-```
-
 ## Mapas y Sets 🗺️
 
 #### Mapas
