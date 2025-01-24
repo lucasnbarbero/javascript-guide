@@ -57,118 +57,110 @@ Pueden basarse en el siguiente ejemplo:
   ```html
   <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Task List</title>
-    <link rel="stylesheet" href="./css/style.css" />
-  </head>
-  <body>
-    <div class="container">
-      <h1>Task List</h1>
-      <form id="taskForm">
-        <input type="text" id="taskTitle" placeholder="Task Title" />
-        <button type="submit">Add Task</button>
-      </form>
-      <ul id="taskList"></ul>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registro de Reservas</title>
+</head>
+<body>
+  <div class="container">
+    <h1>Registro de Reservas</h1>
+    <form id="registroForm">
+      <label for="nombre">Nombre</label>
+      <input type="text" id="nombre" placeholder="Ingrese el nombre" />
+      <span class="error" id="errorNombre"></span>
+
+      <label for="apellido">Apellido</label>
+      <input type="text" id="apellido" placeholder="Ingrese el apellido" />
+      <span class="error" id="errorApellido"></span>
+
+      <label for="telefono">Teléfono</label>
+      <input type="number" id="telefono" placeholder="Ingrese el teléfono" />
+      <span class="error" id="errorTelefono"></span>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="Ingrese el email" />
+      <span class="error" id="errorEmail"></span>
+
+      <label for="dias">Cantidad de días</label>
+      <input type="number" id="dias" placeholder="Ingrese los días de estadía" />
+      <span class="error" id="errorDias"></span>
+
+      <label for="tipoHabitacion">Tipo de Habitación</label>
+      <select id="tipoHabitacion">
+        <option value="">Seleccione una opción</option>
+        <option value="Individual">Individual - $50</option>
+        <option value="Doble">Doble - $90</option>
+        <option value="Suite">Suite - $150</option>
+      </select>
+      <span class="error" id="errorTipoHabitacion"></span>
+
+      <button type="submit">Registrar Huésped</button>
+    </form>
+
+    <div class="reservas" id="listaReservas">
+      <h2>Reservas Registradas</h2>
     </div>
-  </body>
+  </div>
+</body>
 </html>
   ```
   </TabItem>
   <TabItem label="CSS">
-  
   ```css
-  /* Estilo para el cuerpo de la página */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f0f0f0;
-}
-
-/* Estilo para el contenedor principal */
-.container {
-  max-width: 800px;
-  margin: 20px auto;
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Estilo para el encabezado */
-h1 {
-  color: #333;
-}
-
-/* Estilo para el formulario de agregar tarea */
-#taskForm {
-  margin-bottom: 20px;
-}
-
-/* Estilo para el campo de entrada de la tarea */
-#taskTitle {
-  width: calc(100% - 80px);
-  padding: 8px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-right: 10px;
-}
-
-/* Estilo para el botón de agregar tarea */
-#taskForm button {
-  padding: 8px 20px;
-  font-size: 16px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-/* Estilo para la lista de tareas */
-#taskList {
-  list-style: none;
-  padding: 0;
-}
-
-/* Estilo para cada elemento de la lista de tareas */
-#taskList li {
-  padding: 10px;
-  border-bottom: 1px solid #ccc;
-  display: flex;
-  align-items: center;
-}
-
-/* Estilo para la tarea completada */
-.completed {
-  text-decoration: line-through;
-  color: #888;
-}
-
-/* Estilo para los botones de acción en cada tarea */
-li button {
-  margin-left: 10px;
-  padding: 6px 12px;
-  font-size: 14px;
-  background-color: #dc3545;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-/* Estilo para el botón de acción 'Complete' */
-li button.complete {
-  background-color: #28a745;
-}
-
-/* Estilo para el botón de acción 'Delete' */
-li button.delete {
-  background-color: #dc3545;
-}
-```
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    label {
+      font-weight: bold;
+    }
+    input, select, button {
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+    .error {
+      color: red;
+      font-size: 14px;
+    }
+    .reservas {
+      margin-top: 20px;
+    }
+    .reserva {
+      background: #f9f9f9;
+      padding: 10px;
+      border: 1px solid #ddd;
+      margin-bottom: 10px;
+      border-radius: 4px;
+    }
+    ```
   </TabItem>
+  
 </Tabs>
